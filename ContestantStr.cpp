@@ -1,5 +1,4 @@
-//
-// Created by pshih on 15/02/2024.
-//
-
 #include "ContestantStr.h"
+
+ContestantStr::ContestantStr(ContestantID* IDPtr, Contestant* conPtr): conIDPtr(IDPtr), conPtr (conPtr){}
+
