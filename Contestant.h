@@ -6,8 +6,8 @@
 #include "Country.h"
 #include "Team.h"
 
-class Team; //
-class Country; //
+class Team;
+class Country;
 class Contestant {
 private:
     int contestantId;
@@ -15,12 +15,17 @@ private:
     Sport sport;
     int strength;
     Country* countryPtr;
-    Team* team1ptr; //NOT SURE IF PTR
+    int number_of_teams; // max 3
+    /*Team* team1ptr; //NOT SURE IF PTR
     Team* team2ptr;//NOT SURE IF PTR
-    Team* team3ptr;//NOT SURE IF PTR
+    Team* team3ptr;//NOT SURE IF PTR*/
 public:
-
-
+    Contestant(int contestantId, int countryId, Sport sport, int strength ,Country* countryPtr);
+    ~Contestant() = default;
+    Contestant(const Contestant &toCopy) = default;
+    int get_strength();
+    void change_strength(int updated_strength);
+    int get_number_of_teams();
 };
 
 
