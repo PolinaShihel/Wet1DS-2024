@@ -22,14 +22,14 @@ private:
     AVLTree<ContestantStr*, int> contenstantStr1;
     AVLTree<ContestantID*, int> contenstantId2;
     AVLTree<ContestantStr*, int> contenstantStr2;
-    AVLTree<ContestantID*, int> contenstantId3;
+    AVLTree<ContestantI int> contenstantId3;
     AVLTree<ContestantStr*, int> contenstantStr3;
-    Node<ContestantStr*,int> * contenstantStr1Max;
-    Node<ContestantStr*,int> * contenstantStr1Min;
-    Node<ContestantStr*,int> * contenstantStr2Max;
-    Node<ContestantStr*,int> * contenstantStr2Min;
-    Node<ContestantStr*,int> * contenstantStr3Max;
-    Node<ContestantStr*,int> * contenstantStr3Min;
+//    Node<ContestantStr*,int> * contenstantStr1Max; // check after insert and delete if max/min changed
+//    Node<ContestantStr*,int> * contenstantStr1Min;
+//    Node<ContestantStr*,int> * contenstantStr2Max;
+//    Node<ContestantStr*,int> * contenstantStr2Min;
+//    Node<ContestantStr*,int> * contenstantStr3Max;
+//    Node<ContestantStr*,int> * contenstantStr3Min;
 
 public:
 

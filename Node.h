@@ -47,6 +47,7 @@ public:
     //Others
     Node* findSecondBiggest(Node *root);
     Node* findBiggest();
+    Node* findSmallest();
     void swap(Node* source, Node* destination);
     Node* insertNode(const Cond& key,const T& data);
     Node* deleteNode(const Cond& key);
@@ -327,6 +328,14 @@ Node<T,Cond>* Node<T,Cond>::findBiggest()
     if(this->right == nullptr)
         return this;
     return this->right->findBiggest();
+}
+
+template <class T, class Cond>
+Node<T,Cond>* Node<T,Cond>::findSmallest()
+{
+    if(this->left == nullptr)
+        return this;
+    return this->left->findSmallest();
 }
 
 #endif //WET1_NODE_H

@@ -8,8 +8,11 @@ private:
     Node<T,Cond>  *root;
     int size{};
     void reverseInOrderTraversalImpl(Node<T,Cond>* node, int *const output, int* index);
+    Node<T,Cond> *smallest;
+    Node<T,Cond> *biggest;
+
 public:
-    AVLTree(): root(nullptr), size(0) {}
+    AVLTree(): root(nullptr), size(0), smallest(nullptr), biggest(nullptr) {}
     virtual ~AVLTree();
     void insert(const Cond& key,const T& data);
     T* find(const Cond& key);
@@ -19,6 +22,8 @@ public:
     void reverseInOrderTraversal(int *const output);
     Node<T,Cond>* getRoot();
     Node<T,Cond>* getBiggest();
+    Node<T,Cond>* getSmallest();
+
 };
 
 template<class T, class Cond>
@@ -34,6 +39,8 @@ void AVLTree<T,Cond>::insert(const Cond &key,const T& data) {
     else
         this->root = this->root->insertNode(key,data);
     this->size++;
+    this->smallest = this->getSmallest();
+    this->biggest = this->getBiggest();
 }
 
 template<class T, class Cond>
@@ -57,6 +64,8 @@ template<class T, class Cond>
 void AVLTree<T,Cond>::remove(const Cond& key) {
     this->root = this->root->deleteNode(key);
     this->size--;
+    this->smallest = this->getSmallest();
+    this->biggest = this->getBiggest();
 }
 
 template<class T, class Cond>
@@ -70,7 +79,7 @@ void AVLTree<T,Cond>::reverseInOrderTraversalImpl(Node<T, Cond> *node, int *cons
     if(node == nullptr)
         return;
     reverseInOrderTraversalImpl(node->getRight(), output, index);
-    output[(*index)++] = node->getKey(); //the function stores the movie ID in the array
+    output[(*index)++] = node->getKey();
     reverseInOrderTraversalImpl(node->getLeft(), output, index);
 }
 
@@ -84,6 +93,12 @@ template<class T, class Cond>
 Node<T,Cond>* AVLTree<T,Cond>::getBiggest()
 {
     return this->root->findBiggest();
+}
+
+template<class T, class Cond>
+Node<T,Cond>* AVLTree<T,Cond>::getSmallest()
+{
+    return this->root->findSmallest();
 }
 
 
