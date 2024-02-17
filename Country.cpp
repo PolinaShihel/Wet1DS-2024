@@ -14,6 +14,9 @@ int Country::get_country_id()  {
 int Country::get_medals()  {
     return medals;
 }
+void Country::add_a_medal() {
+    medals+=1;
+}
 void Country::add_contestant() {
     contestantsCounter += 1;
 }

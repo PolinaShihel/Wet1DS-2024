@@ -17,6 +17,7 @@ public:
     Country(const Country &toCopy) = default;
     int get_country_id();
     int get_medals();
+    void add_a_medal();
     void add_contestant();
     void add_team();
     void remove_contestant();

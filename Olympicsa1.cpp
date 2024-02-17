@@ -97,12 +97,16 @@ StatusType Olympics::add_contestant(int contestantId ,int countryId,Sport sport,
     if (countryId <= 0 || strength < 0 || contestantId <= 0 )
         return StatusType::INVALID_INPUT;
 
-    if(!m_countries.exist(countryId) ) // if the country doesn't exist
-        return StatusType::FAILURE;
-
     try {
-        Contestant toAdd = Contestant(contestantId, countryId, sport, strength,m_countries.find(countryId));
-        m_contestants.insert(contestantId, toAdd);
+        if(!m_contestants.exist(contestantId) && m_countries.exist(countryId)) {
+            Country *tempCountry = m_countries.find(countryId);
+            Contestant toAdd = Contestant(contestantId,countryId,sport,strength,tempCountry);
+            m_contestants.insert(contestantId,toAdd);
+            tempCountry->add_contestant();
+        }
+        else{
+            return StatusType::FAILURE;
+        }
     }
     catch (std::bad_alloc &error) {
         return StatusType::ALLOCATION_ERROR;
@@ -110,7 +114,9 @@ StatusType Olympics::add_contestant(int contestantId ,int countryId,Sport sport,
     catch (KeyExists &error) {
         return StatusType::FAILURE;
     }
-
+    catch (KeyNotFound &error) {
+        return StatusType::FAILURE;
+    }
     return StatusType::SUCCESS;
 }
 	
@@ -122,6 +128,7 @@ StatusType Olympics::remove_contestant(int contestantId){
         Contestant* toRemove = m_contestants.find(contestantId);
         if( !(toRemove->is_team1_free()) || !(toRemove->is_team2_free()) || !(toRemove->is_team3_free()) ) // meaning the constesant is active in some team or teams
             return StatusType::FAILURE;
+        toRemove->get_country_ptr()->remove_contestant();
         m_contestants.remove(contestantId);
     }
     catch (std::bad_alloc &error) {
@@ -175,11 +182,41 @@ StatusType Olympics::update_contestant_strength(int contestantId ,int change){
 }
 
 output_t<int> Olympics::get_strength(int contestantId){
-	return 0;
+    if (contestantId <= 0)
+        return StatusType::INVALID_INPUT;
+
+    int contestant_strength=0;
+    try {
+        Contestant* tempPtr = m_contestants.find(contestantId);
+        contestant_strength = tempPtr->get_strength();
+    }
+    catch (std::bad_alloc &error) {
+        return StatusType::ALLOCATION_ERROR;
+    }
+    catch (KeyNotFound &error) {
+        return StatusType::FAILURE;
+    }
+    return contestant_strength;
 }
 
 output_t<int> Olympics::get_medals(int countryId){
-	return 0;
+    if (countryId <= 0)
+        return StatusType::INVALID_INPUT;
+
+    int number_of_medals=0;
+
+    try {
+        Country* countryPtr = m_countries.find(countryId);
+        number_of_medals=countryPtr->get_medals();
+    }
+    catch (std::bad_alloc &error) {
+        return StatusType::ALLOCATION_ERROR;
+    }
+    catch (KeyNotFound &error) {
+        return StatusType::FAILURE;
+    }
+
+	return number_of_medals;
 }
 
 output_t<int> Olympics::get_team_strength(int teamId){
@@ -191,7 +228,32 @@ StatusType Olympics::unite_teams(int teamId1,int teamId2){
 }
 
 StatusType Olympics::play_match(int teamId1,int teamId2){
-	return StatusType::FAILURE;
+    if (teamId1 <= 0 || teamId2 <= 0 || teamId1==teamId2)
+        return StatusType::INVALID_INPUT;
+
+    try {
+        Team* team1 = m_teams.find(teamId1);
+        Team* team2 = m_teams.find(teamId2);
+
+        if( team1->get_sport() != team2->get_sport())
+            return StatusType::FAILURE;
+
+        int team1_score = team1->getCountryPtr()->get_medals() + get_team_strength(teamId1);
+        int team2_score = team2->getCountryPtr()->get_medals() + get_team_strength(teamId2);
+
+        if( team1_score > team2_score)
+            team1->getCountryPtr()->add_a_medal();
+        else
+            if(team1_score < team2_score)
+                team2->getCountryPtr()->add_a_medal();
+    }
+    catch (std::bad_alloc &error) {
+        return StatusType::ALLOCATION_ERROR;
+    }
+    catch (KeyNotFound &error) {
+        return StatusType::FAILURE;
+    }
+    return StatusType::SUCCESS;
 }
 
 output_t<int> Olympics::austerity_measures(int teamId){
