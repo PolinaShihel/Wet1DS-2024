@@ -28,6 +28,8 @@ private:
     void moveContestant(AVLTree<ContestantID*, int>* idDest,AVLTree<ContestantStr*, StrCond>* strDest,
             AVLTree<ContestantID*, int>* idSrc,AVLTree<ContestantStr*, StrCond>* strSrc,
             Node<ContestantID*, int> * item);
+    void deleteInOrderID(Node<ContestantID*, int>* node);
+    void deleteInOrderStr(Node<ContestantStr*, StrCond>* node);
 public:
     Team(int teamId,int countryId, Sport sport,Country* country);
     Team(const Team &toCopy) = default;
@@ -35,8 +37,11 @@ public:
     int getContestantCount();
     Country* getCountryPtr();
     Sport get_sport();
+    int getID();
     void addContestantToTeam(Contestant * contestant);
+    void removeContestantFromTeam(Contestant * contestant);
     bool aleadyExists(int id);
+    void destoryTrees();
 };
 
 

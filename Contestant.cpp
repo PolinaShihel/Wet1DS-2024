@@ -48,3 +48,11 @@ Country* Contestant::get_country_ptr(){
     return this->countryPtr;
 }
 
+void Contestant::freeTeam(int id){
+   if(!(this->is_team1_free())&&(this->team1ptr->getID()==id))
+       this->team1ptr= nullptr;
+   else if(!(this->is_team2_free())&&(this->team2ptr->getID()==id))
+       this->team2ptr= nullptr;
+   else
+       this->team3ptr = nullptr;
+}

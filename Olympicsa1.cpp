@@ -7,9 +7,17 @@ Olympics::Olympics():m_countries(),m_teams(),m_contestants(){
 }
 
 Olympics::~Olympics(){
-
+    this->travelInOrderTeams(m_teams.getRoot());
 }
-	
+
+void  Olympics::travelInOrderTeams(Node<Team, int>* node){
+    if(node == nullptr)
+        return;
+    this->travelInOrderTeams(node->getLeft());
+    node->getNodeDataPointer()->destoryTrees();
+    this->travelInOrderTeams(node->getRight());
+}
+
 StatusType Olympics::add_country(int countryId, int medals){
     if (countryId <= 0 || medals < 0)
         return StatusType::INVALID_INPUT;
@@ -174,10 +182,30 @@ StatusType Olympics::add_contestant_to_team(int teamId,int contestantId){
 }
 
 StatusType Olympics::remove_contestant_from_team(int teamId,int contestantId){
-	return StatusType::FAILURE;
+    if (teamId <= 0 || contestantId <= 0)
+        return StatusType::INVALID_INPUT;
+    try {
+        Team *team = m_teams.find(teamId);
+        Contestant *contestant = m_contestants.find(contestantId);
+        if(!team->aleadyExists(contestantId))
+            return StatusType::FAILURE;
+        team->removeContestantFromTeam(contestant);
+        contestant->freeTeam(teamId);
+    }
+    catch (std::bad_alloc &error) {
+        return StatusType::ALLOCATION_ERROR;
+    }
+    catch (KeyExists &error) {
+        return StatusType::FAILURE;
+    }
+    catch (KeyNotFound &error) {
+        return StatusType::FAILURE;
+    }
+    return StatusType::SUCCESS;
 }
 
 StatusType Olympics::update_contestant_strength(int contestantId ,int change){
+
 	return StatusType::FAILURE;
 }
 
@@ -238,8 +266,8 @@ StatusType Olympics::play_match(int teamId1,int teamId2){
         if( team1->get_sport() != team2->get_sport())
             return StatusType::FAILURE;
 
-        int team1_score = team1->getCountryPtr()->get_medals() + get_team_strength(teamId1);
-        int team2_score = team2->getCountryPtr()->get_medals() + get_team_strength(teamId2);
+        int team1_score = team1->getCountryPtr()->get_medals() + team1->get_team_strength(teamId1);
+        int team2_score = team2->getCountryPtr()->get_medals() + team2->get_team_strength(teamId2);
 
         if( team1_score > team2_score)
             team1->getCountryPtr()->add_a_medal();

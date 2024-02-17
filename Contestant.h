@@ -34,6 +34,7 @@ public:
     bool is_team2_free ();
     bool is_team3_free ();
     bool teamsFull();
+    void freeTeam(int id);
 
 
 

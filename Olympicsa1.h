@@ -26,7 +26,7 @@ private:
     AVLTree<Country, int> m_countries;
     AVLTree<Team, int> m_teams;
     AVLTree<Contestant, int> m_contestants;
-
+    void travelInOrderTeams(Node<Team, int>* node);
 	
 public:
 	// <DO-NOT-MODIFY> {
