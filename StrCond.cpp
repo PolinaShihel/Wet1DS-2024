@@ -25,5 +25,5 @@ bool StrCond::operator==(const StrCond& other) const
 
 StrCond::operator int() const
 {
-    return ID;
+    return Strength;
 }

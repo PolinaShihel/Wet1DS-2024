@@ -1,6 +1,21 @@
 add_country 6 6
 add_team 218 6 0
-add_contestant 1 6 0 1
+add_contestant 1 6 0 2
+add_contestant 4 6 0 5
+add_contestant 6 6 0 3
+add_contestant 10 6 0 10
+add_contestant 16 6 0 11
+add_contestant 20 6 0 15
+add_contestant 100 6 0 7
+add_contestant 101 6 0 6
+add_contestant 102 6 0 4
 add_contestant_to_team 218 1
-
-
+add_contestant_to_team 218 4
+add_contestant_to_team 218 6
+add_contestant_to_team 218 10
+add_contestant_to_team 218 16
+add_contestant_to_team 218 20
+add_contestant_to_team 218 100
+add_contestant_to_team 218 101
+add_contestant_to_team 218 102
+get_team_strength 218

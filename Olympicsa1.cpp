@@ -195,9 +195,6 @@ StatusType Olympics::remove_contestant_from_team(int teamId,int contestantId){
     catch (std::bad_alloc &error) {
         return StatusType::ALLOCATION_ERROR;
     }
-    catch (KeyExists &error) {
-        return StatusType::FAILURE;
-    }
     catch (KeyNotFound &error) {
         return StatusType::FAILURE;
     }
@@ -205,8 +202,31 @@ StatusType Olympics::remove_contestant_from_team(int teamId,int contestantId){
 }
 
 StatusType Olympics::update_contestant_strength(int contestantId ,int change){
-
-	return StatusType::FAILURE;
+    if(contestantId <= 0)
+        return StatusType::INVALID_INPUT;
+    try{
+        Contestant* contestant = this->m_contestants.find(contestantId);
+        int currStrength = contestant->get_strength() + change;
+        if(currStrength < 0)
+            return StatusType::FAILURE;
+        Team* team1 = contestant->getTeamPtr(1);
+        Team* team2 = contestant->getTeamPtr(2);
+        Team* team3 = contestant->getTeamPtr(3);
+        if(team1)
+            team1->updateContestantStr(contestantId, contestant->get_strength(),currStrength);
+        if(team2)
+            team2->updateContestantStr(contestantId, contestant->get_strength(),currStrength);
+        if(team3)
+            team3->updateContestantStr(contestantId, contestant->get_strength(),currStrength);
+        contestant->setStrength(currStrength);
+    }
+    catch (std::bad_alloc &error) {
+        return StatusType::ALLOCATION_ERROR;
+    }
+    catch (KeyNotFound &error) {
+        return StatusType::FAILURE;
+    }
+	return StatusType::SUCCESS;
 }
 
 output_t<int> Olympics::get_strength(int contestantId){
@@ -248,7 +268,19 @@ output_t<int> Olympics::get_medals(int countryId){
 }
 
 output_t<int> Olympics::get_team_strength(int teamId){
-	return 0;
+    if(teamId <= 0)
+        return StatusType::INVALID_INPUT;
+    try{
+        Team* team = this->m_teams.find(teamId);
+        return team->getTeamStrength();
+    }
+    catch (std::bad_alloc &error) {
+        return StatusType::ALLOCATION_ERROR;
+    }
+    catch (KeyNotFound &error) {
+        return StatusType::FAILURE;
+    }
+    return StatusType::SUCCESS;
 }
 
 StatusType Olympics::unite_teams(int teamId1,int teamId2){
@@ -266,8 +298,8 @@ StatusType Olympics::play_match(int teamId1,int teamId2){
         if( team1->get_sport() != team2->get_sport())
             return StatusType::FAILURE;
 
-        int team1_score = team1->getCountryPtr()->get_medals() + team1->get_team_strength(teamId1);
-        int team2_score = team2->getCountryPtr()->get_medals() + team2->get_team_strength(teamId2);
+        int team1_score = team1->getCountryPtr()->get_medals() + team1->getTeamStrength();
+        int team2_score = team2->getCountryPtr()->get_medals() + team2->getTeamStrength();
 
         if( team1_score > team2_score)
             team1->getCountryPtr()->add_a_medal();

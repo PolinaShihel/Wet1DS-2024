@@ -42,6 +42,8 @@ public:
     void removeContestantFromTeam(Contestant * contestant);
     bool aleadyExists(int id);
     void destoryTrees();
+    void updateContestantStr(int id, int prevStr, int str);
+    int getTeamStrength();
 };
 
 

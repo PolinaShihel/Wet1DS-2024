@@ -26,6 +26,7 @@ public:
     int get_id();
     Sport get_sport();
     Country* get_country_ptr();
+    Team* getTeamPtr(int numOfTeam);
     void change_strength(int updated_strength);
     void join_team1 (Team* team);
     void join_team2 (Team* team);
@@ -35,6 +36,7 @@ public:
     bool is_team3_free ();
     bool teamsFull();
     void freeTeam(int id);
+    void setStrength(int strength);
 
 
 

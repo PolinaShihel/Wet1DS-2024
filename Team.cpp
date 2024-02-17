@@ -24,6 +24,7 @@ bool Team::aleadyExists(int id) {
     return (this->contenstantId1.exist(id) || this->contenstantId2.exist(id) || this->contenstantId3.exist(id));
 }
 
+
 void Team::addContestantToTeam(Contestant *contestant) {
     int id = contestant->get_id();
     int str = contestant->get_strength();
@@ -228,8 +229,44 @@ void Team::moveContestant(AVLTree<ContestantID *, int> *idDest, AVLTree<Contesta
     ContestantStr *contestantStr = item->getNodeData()->getContestantStrPtr();
     int str = contestantStr->getConPtr()->get_strength();
     StrCond strCond = StrCond(str, id);
+
     idDest->insert(id, item->getNodeData());
     strDest->insert(strCond, contestantStr);
+
     idSrc->remove(id);
     strSrc->remove(strCond);
+}
+
+void Team::updateContestantStr(int id, int prevStr, int str){
+    int id1 = this->contenstantId1.getBiggest()->getKey();
+    int idSmall2 = this->contenstantId2.getSmallest()->getKey();
+    int idBig2 = this->contenstantId2.getBiggest()->getKey();
+    StrCond st = StrCond(prevStr,id);
+    if(id <= id1) //the contestant is in the first tree
+    {
+        ContestantStr * strObj =  *(this->contenstantStr1.find(st));
+        this->contenstantStr1.remove(st);
+        st = StrCond(str,id);
+        this->contenstantStr1.insert(st,strObj);
+    }
+    else if((id >= idSmall2)&&(id <= idBig2))//the contestant is in the second tree
+    {
+        ContestantStr * strObj =  *(this->contenstantStr2.find(st));
+        this->contenstantStr2.remove(st);
+        st = StrCond(str,id);
+        this->contenstantStr2.insert(st,strObj);
+    }
+    else{//the contestant is in the third tree
+        ContestantStr * strObj =  *(this->contenstantStr3.find(st));
+        this->contenstantStr3.remove(st);
+        st = StrCond(str,id);
+        this->contenstantStr3.insert(st,strObj);
+    }
+}
+
+int Team::getTeamStrength(){
+    if((this->getContestantCount()%3) != 0)
+        return 0;
+    return this->contenstantStr1.getBiggest()->getKey() + this->contenstantStr2.getBiggest()->getKey()
+                                                                     + this->contenstantStr3.getBiggest()->getKey();
 }

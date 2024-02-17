@@ -48,6 +48,16 @@ Country* Contestant::get_country_ptr(){
     return this->countryPtr;
 }
 
+Team* Contestant::getTeamPtr(int numOfTeam)
+{
+    if(numOfTeam == 1)
+        return this->team1ptr;
+    else if(numOfTeam == 2)
+        return this->team2ptr;
+    else
+        return this->team3ptr;
+}
+
 void Contestant::freeTeam(int id){
    if(!(this->is_team1_free())&&(this->team1ptr->getID()==id))
        this->team1ptr= nullptr;
@@ -55,4 +65,9 @@ void Contestant::freeTeam(int id){
        this->team2ptr= nullptr;
    else
        this->team3ptr = nullptr;
+}
+
+void Contestant::setStrength(int strength)
+{
+    this->strength = strength;
 }
