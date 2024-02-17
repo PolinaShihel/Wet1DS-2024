@@ -15,12 +15,14 @@ public:
     Country(int countryId, int medals);
     ~Country() = default;
     Country(const Country &toCopy) = default;
-    int get_country_id() const;
+    int get_country_id();
     int get_medals();
     void add_contestant();
     void add_team();
     void remove_contestant();
     void remove_team();
+    int get_number_of_teams();
+    int get_number_of_contestants();
 
 };
 

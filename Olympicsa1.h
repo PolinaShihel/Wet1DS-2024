@@ -19,6 +19,7 @@
 #include "AVL_tree.h"
 #include "Team.h"
 #include "Country.h"
+#include "Contestant.h"
 
 class Olympics {
 private:

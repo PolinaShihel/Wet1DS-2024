@@ -5,11 +5,13 @@
 #include "Country.h"
 
 Country::Country(int countryId, int medals)
-: countryId(countryId), medals(medals), teamsCounter(0), contestantsCounter(0) {}
-int Country::get_country_id() const {
+: countryId(countryId), medals(medals), teamsCounter(0), contestantsCounter(0)
+{}
+
+int Country::get_country_id()  {
     return countryId;
 }
-int Country::get_medals() {
+int Country::get_medals()  {
     return medals;
 }
 void Country::add_contestant() {
@@ -23,4 +25,10 @@ void Country::remove_contestant() {
 }
 void Country::remove_team() {
     teamsCounter -= 1;
+}
+int Country::get_number_of_teams(){
+    return teamsCounter;
+}
+int Country::get_number_of_contestants(){
+    return contestantsCounter;
 }
