@@ -24,6 +24,8 @@ public:
     Contestant(const Contestant &toCopy) = default;
     int get_strength();
     int get_id();
+    Sport get_sport();
+    Country* get_country_ptr();
     void change_strength(int updated_strength);
     void join_team1 (Team* team);
     void join_team2 (Team* team);
@@ -31,6 +33,7 @@ public:
     bool is_team1_free ();
     bool is_team2_free ();
     bool is_team3_free ();
+    bool teamsFull();
 
 
 

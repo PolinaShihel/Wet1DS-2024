@@ -5,7 +5,7 @@
 #include "Contestant.h"
 
 Contestant::Contestant(int contestantId, int countryId, Sport sport, int strength ,Country* countryPtr) :
-    contestantId(contestantId), countryId(countryId), sport(sport), strength(strength) ,countryPtr(countryPtr),number_of_teams(0)
+    contestantId(contestantId), countryId(countryId), sport(sport), strength(strength) ,countryPtr(countryPtr)
     ,team1ptr(nullptr), team2ptr(nullptr), team3ptr(nullptr) {}
 int Contestant::get_strength() {
     return strength;
@@ -33,5 +33,18 @@ bool Contestant::is_team2_free () {
 }
 bool Contestant::is_team3_free () {
     return (team3ptr == nullptr);
+}
+
+bool Contestant::teamsFull() {
+    return (!is_team1_free())&&(!is_team2_free())&&(!is_team3_free());
+}
+
+Sport Contestant::get_sport()
+{
+    return this->sport;
+}
+
+Country* Contestant::get_country_ptr(){
+    return this->countryPtr;
 }
 

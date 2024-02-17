@@ -99,12 +99,16 @@ Node<T,Cond>* AVLTree<T,Cond>::getRoot()
 template<class T, class Cond>
 Node<T,Cond>* AVLTree<T,Cond>::getBiggest()
 {
+    if(!this->root)
+        return nullptr;
     return this->root->findBiggest();
 }
 
 template<class T, class Cond>
 Node<T,Cond>* AVLTree<T,Cond>::getSmallest()
 {
+    if(!this->root)
+        return nullptr;
     return this->root->findSmallest();
 }
 

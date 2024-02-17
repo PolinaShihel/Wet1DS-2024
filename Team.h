@@ -7,6 +7,7 @@
 #include "Country.h"
 #include "ContestantID.h"
 #include "ContestantStr.h"
+#include "StrCond.h"
 
 class Contestant;
 class Country;
@@ -19,13 +20,13 @@ private:
     Sport sport;
     Country* countryPtr;
     AVLTree<ContestantID*, int> contenstantId1;
-    AVLTree<ContestantStr*, int> contenstantStr1;
+    AVLTree<ContestantStr*, StrCond> contenstantStr1;
     AVLTree<ContestantID*, int> contenstantId2;
-    AVLTree<ContestantStr*, int> contenstantStr2;
+    AVLTree<ContestantStr*, StrCond> contenstantStr2;
     AVLTree<ContestantID*, int> contenstantId3;
-    AVLTree<ContestantStr*, int> contenstantStr3;
-    void moveContestant(AVLTree<ContestantID*, int>* idDest,AVLTree<ContestantStr*, int>* strDest,
-            AVLTree<ContestantID*, int>* idSrc,AVLTree<ContestantStr*, int>* strSrc,
+    AVLTree<ContestantStr*, StrCond> contenstantStr3;
+    void moveContestant(AVLTree<ContestantID*, int>* idDest,AVLTree<ContestantStr*, StrCond>* strDest,
+            AVLTree<ContestantID*, int>* idSrc,AVLTree<ContestantStr*, StrCond>* strSrc,
             Node<ContestantID*, int> * item);
 public:
     Team(int teamId,int countryId, Sport sport,Country* country);
@@ -33,6 +34,7 @@ public:
     ~Team()= default;
     int getContestantCount();
     Country* getCountryPtr();
+    Sport get_sport();
     void addContestantToTeam(Contestant * contestant);
     bool aleadyExists(int id);
 };

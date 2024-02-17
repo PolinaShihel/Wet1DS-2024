@@ -138,12 +138,21 @@ StatusType Olympics::add_contestant_to_team(int teamId,int contestantId){
         return StatusType::INVALID_INPUT;
     try {
             Team *team = m_teams.find(teamId);
+            Contestant *contestant = m_contestants.find(contestantId);
+            if(contestant->teamsFull())
+                return StatusType::FAILURE;
             if(team->aleadyExists(contestantId))
                 return StatusType::FAILURE;
-            Contestant *contestant = m_contestants.find(contestantId);
-
-//            TODO check all ifs for this
-
+            if((contestant->get_sport()!=team->get_sport())||
+                    ((contestant->get_country_ptr()->get_country_id())!=(team->getCountryPtr()->get_country_id())))
+                return StatusType::FAILURE;
+        team->addContestantToTeam(contestant);
+        if(contestant->is_team1_free())
+            contestant->join_team1(team);
+        else if(contestant->is_team2_free())
+            contestant->join_team2(team);
+        else
+            contestant->join_team3(team);
     }
     catch (std::bad_alloc &error) {
         return StatusType::ALLOCATION_ERROR;
