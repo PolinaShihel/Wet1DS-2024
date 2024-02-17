@@ -23,6 +23,7 @@ public:
     ~Contestant() = default;
     Contestant(const Contestant &toCopy) = default;
     int get_strength();
+    int get_id();
     void change_strength(int updated_strength);
     void join_team1 (Team* team);
     void join_team2 (Team* team);

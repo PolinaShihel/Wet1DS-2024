@@ -13,6 +13,9 @@ int Contestant::get_strength() {
 void Contestant::change_strength(int updated_strength) {
     strength = updated_strength;
 }
+int Contestant::get_id(){
+    return this->contestantId;
+}
 void Contestant::join_team1 (Team* team){
     team1ptr = team;
 }

@@ -3,16 +3,19 @@
 
 #include "Contestant.h"
 #include "ContestantID.h"
-
+class Contestant;
+class  ContestantID;
 class ContestantStr {
 private:
     ContestantID* conIDPtr;
     Contestant* conPtr;
 public:
     ContestantStr() = default;
-    ContestantStr(const ContestantStr& conStr) = default;
     ContestantStr(ContestantID* IDptr, Contestant* conPtr);
+    ContestantStr(const ContestantStr &toCopy) = default;
     ~ContestantStr()=default;
+
+    Contestant* getConPtr();
 };
 
 

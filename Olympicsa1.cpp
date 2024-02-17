@@ -2,7 +2,7 @@
 
 
 
-Olympics::Olympics(){
+Olympics::Olympics():m_countries(),m_teams(),m_contestants(){
 
 }
 
@@ -49,11 +49,48 @@ StatusType Olympics::remove_country(int countryId){
 }
 
 StatusType Olympics::add_team(int teamId,int countryId,Sport sport){
-	return StatusType::FAILURE;
+    if (teamId <= 0 || countryId <= 0)
+        return StatusType::INVALID_INPUT;
+    try {
+        if(!m_teams.exist(teamId) && m_countries.exist(countryId)) {
+            Country *tempCountry = m_countries.find(countryId);
+            Team toAdd = Team(teamId,countryId,sport,tempCountry);
+            m_teams.insert(teamId,toAdd);
+            tempCountry->add_team();
+        }
+        else{
+            return StatusType::FAILURE;
+        }
+    }
+    catch (std::bad_alloc &error) {
+        return StatusType::ALLOCATION_ERROR;
+    }
+    catch (KeyExists &error) {
+        return StatusType::FAILURE;
+    }
+    catch (KeyNotFound &error) {
+        return StatusType::FAILURE;
+    }
+    return StatusType::SUCCESS;
 }
 
 StatusType Olympics::remove_team(int teamId){
-	return StatusType::FAILURE;
+    if (teamId <= 0)
+        return StatusType::INVALID_INPUT;
+    try {
+        Team* team = m_teams.find(teamId);
+        if(team->getContestantCount() != 0)
+            return StatusType::FAILURE;
+        team->getCountryPtr()->remove_team();
+        m_teams.remove(teamId);
+    }
+    catch (std::bad_alloc &error) {
+        return StatusType::ALLOCATION_ERROR;
+    }
+    catch (KeyNotFound &error) {
+        return StatusType::FAILURE;
+    }
+    return StatusType::SUCCESS;
 }
 	
 StatusType Olympics::add_contestant(int contestantId ,int countryId,Sport sport,int strength){
@@ -97,7 +134,27 @@ StatusType Olympics::remove_contestant(int contestantId){
 }
 	
 StatusType Olympics::add_contestant_to_team(int teamId,int contestantId){
-	return StatusType::FAILURE;
+    if (teamId <= 0 || contestantId <= 0)
+        return StatusType::INVALID_INPUT;
+    try {
+            Team *team = m_teams.find(teamId);
+            if(team->aleadyExists(contestantId))
+                return StatusType::FAILURE;
+            Contestant *contestant = m_contestants.find(contestantId);
+
+//            TODO check all ifs for this
+
+    }
+    catch (std::bad_alloc &error) {
+        return StatusType::ALLOCATION_ERROR;
+    }
+    catch (KeyExists &error) {
+        return StatusType::FAILURE;
+    }
+    catch (KeyNotFound &error) {
+        return StatusType::FAILURE;
+    }
+    return StatusType::SUCCESS;
 }
 
 StatusType Olympics::remove_contestant_from_team(int teamId,int contestantId){

@@ -3,7 +3,8 @@
 
 #include "Contestant.h"
 #include "ContestantStr.h"
-
+class Contestant;
+class ContestantStr;
 class ContestantID {
 private:
     ContestantStr* conStrPtr;
@@ -12,8 +13,9 @@ public:
     ContestantID() = default;
     ContestantID(const ContestantID& conID) = default;
     ContestantID(Contestant* conPtr);
-    void setStrPtr(ContestantStr* conStrPtr);
     ~ContestantID()=default;
+    void setStrPtr(ContestantStr* conStrPtr);
+    ContestantStr* getContestantStrPtr();
 };
 
 #endif //WET1_WINTER2024_CONTESTANTID_H

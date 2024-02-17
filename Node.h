@@ -10,7 +10,7 @@
 #define empty 0
 #define null_height -1
 
-//AVL tree exception classes
+//AVL tree exception classes //NEED TO RECHECK
 class KeyExists: public std::exception{};
 class KeyNotFound: public std::exception{};
 
@@ -339,3 +339,6 @@ Node<T,Cond>* Node<T,Cond>::findSmallest()
 }
 
 #endif //WET1_NODE_H
+
+
+

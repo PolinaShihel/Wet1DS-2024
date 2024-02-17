@@ -20,6 +20,7 @@ public:
     T findValue(const Cond& key);
     void remove(const Cond& key);
     void reverseInOrderTraversal(int *const output);
+    int getSize();
     Node<T,Cond>* getRoot();
     Node<T,Cond>* getBiggest();
     Node<T,Cond>* getSmallest();
@@ -81,6 +82,12 @@ void AVLTree<T,Cond>::reverseInOrderTraversalImpl(Node<T, Cond> *node, int *cons
     reverseInOrderTraversalImpl(node->getRight(), output, index);
     output[(*index)++] = node->getKey();
     reverseInOrderTraversalImpl(node->getLeft(), output, index);
+}
+
+template<class T, class Cond>
+int AVLTree<T,Cond>::getSize()
+{
+    return this->size;
 }
 
 template<class T, class Cond>
