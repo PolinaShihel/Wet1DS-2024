@@ -13,6 +13,7 @@ private:
 
 public:
     AVLTree(): root(nullptr), size(0), smallest(nullptr), biggest(nullptr) {}
+    AVLTree(T arr[],int size);
     virtual ~AVLTree();
     void insert(const Cond& key,const T& data);
     T* find(const Cond& key);
@@ -26,6 +27,15 @@ public:
     Node<T,Cond>* getSmallest();
 
 };
+
+template<class T, class Cond>
+AVLTree<T,Cond>::AVLTree(T arr[],int size)
+{
+//    TODO BUILD THISSS !!!!!!!!!!!!!! :(
+    this->size = size;
+    this->smallest = this->getSmallest();
+    this->biggest = this->getBiggest();
+}
 
 template<class T, class Cond>
 AVLTree<T,Cond>::~AVLTree()
