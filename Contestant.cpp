@@ -10,9 +10,6 @@ Contestant::Contestant(int contestantId, int countryId, Sport sport, int strengt
 int Contestant::get_strength() {
     return strength;
 }
-void Contestant::change_strength(int updated_strength) {
-    strength = updated_strength;
-}
 int Contestant::get_id(){
     return this->contestantId;
 }

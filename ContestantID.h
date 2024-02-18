@@ -16,6 +16,7 @@ public:
     ~ContestantID()=default;
     void setStrPtr(ContestantStr* conStrPtr);
     ContestantStr* getContestantStrPtr();
+    Contestant* getContestantPtr();
 };
 
 #endif //WET1_WINTER2024_CONTESTANTID_H

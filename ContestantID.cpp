@@ -10,3 +10,7 @@ void ContestantID::setStrPtr(ContestantStr* StrPtr)
 ContestantStr* ContestantID::getContestantStrPtr(){
     return this->conStrPtr;
 }
+
+Contestant* ContestantID::getContestantPtr(){
+    return this->conPtr;
+}
