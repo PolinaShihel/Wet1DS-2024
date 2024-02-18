@@ -25,6 +25,10 @@ public:
     Node<T,Cond>* getRoot();
     Node<T,Cond>* getBiggest();
     Node<T,Cond>* getSmallest();
+    Node<T,Cond>* getSecondBiggest();
+    Node<T,Cond>* getSecondSmallest();
+    Node<T,Cond>* getThirdBiggest();
+    Node<T,Cond>* getThirdSmallest();
     void fillArray(Node<T,Cond>* arr[], int index);
     void fillArrayImpl(Node<T, Cond> *node, Node<T,Cond>* arr[], int* index);
 
@@ -123,6 +127,38 @@ Node<T,Cond>* AVLTree<T,Cond>::getSmallest()
     if(!this->root)
         return nullptr;
     return this->root->findSmallest();
+}
+
+template<class T, class Cond>
+Node<T,Cond>* AVLTree<T,Cond>::getSecondBiggest()
+{
+    if(!this->root)
+        return nullptr;
+    return this->root->findSecondBiggest(root);
+}
+
+template<class T, class Cond>
+Node<T,Cond>* AVLTree<T,Cond>::getSecondSmallest()
+{
+    if(!this->root)
+        return nullptr;
+    return this->root->findSecondSmallest(root);
+}
+
+template<class T, class Cond>
+Node<T,Cond>* AVLTree<T,Cond>::getThirdBiggest()
+{
+    if(!this->root)
+        return nullptr;
+    return this->root->findThirdBiggest(root);
+}
+
+template<class T, class Cond>
+Node<T,Cond>* AVLTree<T,Cond>::getThirdSmallest()
+{
+    if(!this->root)
+        return nullptr;
+    return this->root->findThirdSmallest(root);
 }
 
 template<class T, class Cond>

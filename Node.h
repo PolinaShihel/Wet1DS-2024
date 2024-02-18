@@ -45,7 +45,10 @@ public:
     Node *roll_RL();
     Node *roll_RR();
     //Others
+    Node* findThirdBiggest(Node *root);
+    Node* findThirdSmallest(Node *root);
     Node* findSecondBiggest(Node *root);
+    Node* findSecondSmallest(Node *root);
     Node* findBiggest();
     Node* findSmallest();
     void swap(Node* source, Node* destination);
@@ -208,6 +211,40 @@ Node<T,Cond>* Node<T,Cond>::insertNode(const Cond& newKey,const T& newData)
     return this->rotate();
 }
 
+template <class T, class Cond>
+Node<T,Cond>* Node<T,Cond>::findThirdBiggest(Node *root)
+{
+    if( this->getHeight()< 2)
+        return nullptr;
+
+    if(root -> right ->right ->right == nullptr) {
+        if(root -> right -> left == nullptr)
+            return root;
+        else
+            if( root ->getKey() > root -> right -> left-> getKey())
+                return root;
+            else
+                return root -> right -> left;
+    }
+    return findThirdBiggest(root->right);
+}
+
+template <class T, class Cond>
+Node<T,Cond>* Node<T,Cond>::findThirdSmallest(Node *root)
+{
+    if( this->getHeight()< 2)
+        return nullptr;
+    if(root -> left ->left ->left == nullptr) {
+        if(root -> left -> right == nullptr)
+            return root;
+        else
+            if( (root ->getKey()) < (root -> left -> right-> getKey()))
+                return root;
+            else
+                return root -> left -> right;
+    }
+    return findThirdSmallest(root->left);
+}
 
 template <class T, class Cond>
 Node<T,Cond>* Node<T,Cond>::findSecondBiggest(Node *root)
@@ -215,6 +252,14 @@ Node<T,Cond>* Node<T,Cond>::findSecondBiggest(Node *root)
     if(root -> right ->right == nullptr)
         return root;
     return findSecondBiggest(root->right);
+}
+
+template <class T, class Cond>
+Node<T,Cond>* Node<T,Cond>::findSecondSmallest(Node *root)
+{
+    if(root -> left ->left == nullptr)
+        return root;
+    return findSecondSmallest(root->left);
 }
 
 template <class T, class Cond>

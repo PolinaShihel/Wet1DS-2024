@@ -50,6 +50,7 @@ public:
                    int size2, int size3);
     void merge2arrays(Node<ContestantID*, int>* total[], Node<ContestantID*, int>* ID1[],
                       Node<ContestantID*, int>* ID2[], int size1, int size2);
+    int austerity_measures();
 };
 
 

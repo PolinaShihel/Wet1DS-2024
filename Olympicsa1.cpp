@@ -462,7 +462,25 @@ StatusType Olympics::play_match(int teamId1, int teamId2) {
 }
 
 output_t<int> Olympics::austerity_measures(int teamId) {
-    return 0;
+    if (teamId <= 0)
+        return StatusType::INVALID_INPUT;
+
+    int highest_strength=0;
+
+    try {
+        Team *team = this->m_teams.find(teamId);
+        if (team->getContestantCount() == 3 || (team->getContestantCount() % 3) != 0 )
+            return 0;
+        //TODO: case of 6
+
+    }
+        catch (std::bad_alloc &error) {
+            return StatusType::ALLOCATION_ERROR;
+        }
+        catch (KeyNotFound &error) {
+            return StatusType::FAILURE;
+        }
+        return highest_strength;
 }
 
 
