@@ -34,6 +34,7 @@ template<class T, class Cond>
 AVLTree<T,Cond>::AVLTree(T arr[],int size)
 {
 //    TODO BUILD THISSS !!!!!!!!!!!!!! :(
+
     this->size = size;
     this->smallest = this->getSmallest();
     this->biggest = this->getBiggest();

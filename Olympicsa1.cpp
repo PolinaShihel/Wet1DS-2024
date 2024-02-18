@@ -298,7 +298,7 @@ void Olympics::uniteStr(int t1size1, int t1size2, int t1size3, int t2size1, int 
             j++;
         while((k < t1size3)&&(team1STR3[k]->getNodeData()->getIndex()>= unitedStrSize))
             k++;
-        while((l < t2size1)&&(team1STR1[l]->getNodeData()->getIndex()>= unitedStrSize))
+        while((l < t2size1)&&(team2STR1[l]->getNodeData()->getIndex()>= unitedStrSize))
             l++;
         while((m < t2size2)&&(team2STR2[m]->getNodeData()->getIndex()>= unitedStrSize))
             m++;
@@ -414,24 +414,16 @@ StatusType Olympics::unite_teams(int teamId1, int teamId2) {
                  team1STR2,team1STR3,team2STR1,team2STR2,team2STR3,unitedStr1Size+unitedStr2Size+unitedStr3Size,
                  totalSize,unitedStr3);
 
-
-
-        }
-
-
-
-
+    }
 
 
         //m_teams.remove(teamId1);
         //m_teams.remove(teamId2);
         /*TODO:
-         * in Team add function to set 4 arrays 1 of ContestantID* and 3 of ContestantStr*
-         * sort everything
          * in AVL tree add function to build tree from sorted array
          * use function for all the arrays
+         * change group ptr for all contestants of both teams to point to the new team
           * */
-    }
     catch (std::bad_alloc &error) {
         return StatusType::ALLOCATION_ERROR;
     }
