@@ -302,24 +302,11 @@ void Team::merge2arrays(Node<ContestantID*, int>* total[], Node<ContestantID*, i
 int Team::austerity_measures() {
 
     Contestant* id1_first_big = this->contenstantId1.getBiggest()->getNodeData()->getContestantPtr();
-    Contestant* id1_second_big = this->contenstantId1.getSecondBiggest()->getNodeData()->getContestantPtr();
-    Contestant* id1_third_big = this->contenstantId1.getThirdBiggest()->getNodeData()->getContestantPtr();
-
     Contestant* id2_first_big = this->contenstantId2.getBiggest()->getNodeData()->getContestantPtr();
     Contestant* id2_second_big = this->contenstantId2.getSecondBiggest()->getNodeData()->getContestantPtr();
-    Contestant* id2_third_big = this->contenstantId2.getThirdBiggest()->getNodeData()->getContestantPtr();
-
-    Contestant* id3_first_big = this->contenstantId3.getBiggest()->getNodeData()->getContestantPtr();
-    Contestant* id3_second_big = this->contenstantId3.getSecondBiggest()->getNodeData()->getContestantPtr();
-    Contestant* id3_third_big = this->contenstantId3.getThirdBiggest()->getNodeData()->getContestantPtr();
-
     Contestant* id2_last = this->contenstantId2.getSmallest()->getNodeData()->getContestantPtr();
     Contestant* id2_second_last = this->contenstantId2.getSecondSmallest()->getNodeData()->getContestantPtr();
-    Contestant* id2_third_last = this->contenstantId2.getThirdSmallest()->getNodeData()->getContestantPtr();
-
     Contestant* id3_last = this->contenstantId3.getSmallest()->getNodeData()->getContestantPtr();
-    Contestant* id3_second_last = this->contenstantId3.getSecondSmallest()->getNodeData()->getContestantPtr();
-    Contestant* id3_third_last = this->contenstantId3.getThirdSmallest()->getNodeData()->getContestantPtr();
 
     int str3_biggest_id = this->contenstantStr3.getBiggest()->getNodeData()->getConPtr()->get_id();
     int str2_biggest_id = this->contenstantStr2.getBiggest()->getNodeData()->getConPtr()->get_id();
@@ -333,27 +320,92 @@ int Team::austerity_measures() {
     int str2_second_biggest_str = this->contenstantStr2.getSecondBiggest()->getNodeData()->getConPtr()->get_strength();
     int str1_second_biggest_str = this->contenstantStr1.getSecondBiggest()->getNodeData()->getConPtr()->get_strength();
 
+    int str2_third_biggest_str = this->contenstantStr2.getThirdBiggest()->getNodeData()->getConPtr()->get_strength();
+    int str2_second_biggest_id = this->contenstantStr2.getSecondBiggest()->getNodeData()->getConPtr()->get_id();
+
     //TODO: case of 6
     int highest_score = 0;
     int temp1,temp2,temp3; //highest of each tree
 
-    //case 1: 1 of each tree     --- no change (i think?)
+    //case 1: 1 of each tree     --- no change (i think?) unless there are 3 contestants
 
     //case 2: 2 of the lower tree and 1 of the middle tree
-    temp3 = (id3_first_big->get_id() == str3_biggest_id) ? str3_second_biggest_str : str3_biggest_str;
-    temp2 = (id3_last->get_strength() > str2_biggest_str) ? id3_last->get_strength() : str2_biggest_str;
+    temp3 = (id3_last->get_id() == str3_biggest_id) ? str3_second_biggest_str : str3_biggest_str;
+    temp2 = (id2_last->get_id() == str2_biggest_id) ? str2_second_biggest_str : str2_biggest_str ;
+    temp2 = (id3_last->get_strength() > temp2) ? id3_last->get_strength() : temp2;
     temp1 = (id2_last->get_strength() > str1_biggest_str) ? id2_last->get_strength() : str1_biggest_str;
     highest_score = ((temp3+temp2+temp1) > highest_score) ? temp3+temp2+temp1 : highest_score;
 
     //case 3: 2 of the lower tree and 1 of the higher tree
+    temp3 = str3_biggest_str;
+    temp2 = (id2_last->get_id() == str2_biggest_id) ? str2_second_biggest_str : str2_biggest_str;
+    temp1 = (id2_last->get_strength() > str1_biggest_str) ? id2_last->get_strength() : str1_biggest_str;
+    highest_score = ((temp3+temp2+temp1) > highest_score) ? temp3+temp2+temp1 : highest_score;
 
     //case 4: 2 of the middle tree and 1 of the lower tree
-    //case 5: 2 of the middle tree and 1 of the higher tree
-    //case 6: 2 of the higher tree and 1 of the lower tree
-    //case 7: 2 of the higher tree and 1 of the middle tree
-    //case 8: 3 of the lower tree
-    //case 9: 3 of the middle tree
-    //case 10: 3 of the higher tree
+    temp3 = (id3_last->get_id() == str3_biggest_id) ? str3_second_biggest_str : str3_biggest_str;
+    temp2 = (id3_last->get_strength() > str2_biggest_str) ? id3_last->get_strength() : str2_biggest_str;
+    temp1 = str1_biggest_str;
+    highest_score = ((temp3+temp2+temp1) > highest_score) ? temp3+temp2+temp1 : highest_score;
 
+    //case 5: 2 of the middle tree and 1 of the higher tree
+    temp3 = str3_biggest_str;
+    temp2 = (id1_first_big->get_strength() > str2_biggest_str) ? id1_first_big->get_strength() : str2_biggest_str;
+    temp1 = (id1_first_big->get_id() == str1_biggest_id)? str1_second_biggest_str : str1_biggest_str;
+    highest_score = ((temp3+temp2+temp1) > highest_score) ? temp3+temp2+temp1 : highest_score;
+
+    //case 6: 2 of the higher tree and 1 of the lower tree
+    temp3 = (id2_first_big->get_strength() > str3_biggest_str) ? id2_first_big->get_strength() : str3_biggest_str;
+    temp2 = (id2_first_big->get_id() == str2_biggest_id) ? str2_second_biggest_str : str2_biggest_str;
+    temp1 = str1_biggest_str;
+    highest_score = ((temp3+temp2+temp1) > highest_score) ? temp3+temp2+temp1 : highest_score;
+
+    //case 7: 2 of the higher tree and 1 of the middle tree
+    temp3 = (id2_first_big->get_strength() > str3_biggest_str) ? id2_first_big->get_strength() : str3_biggest_str;
+    temp2 = (id2_first_big->get_id() == str2_biggest_id) ? str2_second_biggest_str : str2_biggest_str ;
+    temp2 = (id1_first_big->get_strength() > temp2) ? id1_first_big->get_strength() : temp2;
+    temp1 = (str1_biggest_id == id1_first_big->get_id()) ? str1_second_biggest_str : str1_biggest_str;
+    highest_score = ((temp3+temp2+temp1) > highest_score) ? temp3+temp2+temp1 : highest_score;
+
+    //case 8: 3 of the lower tree
+    temp3 = (id3_last->get_id() == str3_biggest_id) ? str3_second_biggest_str : str3_biggest_str;
+    if(id2_last->get_id() == str2_biggest_id && id2_second_last->get_id() == str2_second_biggest_id
+        || id2_last->get_id() == str2_second_biggest_id && id2_second_last->get_id() == str2_biggest_id )
+            temp2 = str2_third_biggest_str;
+    else {
+        if (id2_last->get_id() == str2_biggest_id || id2_second_last->get_id() == str2_biggest_id)
+            temp2 = str2_second_biggest_str;
+        else
+            temp2 = str2_biggest_str;
+    }
+    temp2 = (id3_last->get_strength() > temp2) ? id3_last->get_strength() : temp2;
+    temp1 =(id2_last->get_strength() > id2_second_last->get_strength()) ? id2_last->get_strength() : id2_second_last->get_strength();
+    temp1 = (str1_biggest_str > temp1 ) ? str1_biggest_str : temp1 ;
+    highest_score = ((temp3+temp2+temp1) > highest_score) ? temp3+temp2+temp1 : highest_score;
+
+    //case 9: 3 of the middle tree
+    temp3 =(id3_last->get_id() == str3_biggest_id) ? str3_second_biggest_str : str3_biggest_str;
+    temp2 = (str2_biggest_str > id3_last->get_strength()) ? str2_biggest_str : id3_last->get_strength();
+    temp2 = (id1_first_big->get_strength() > temp2) ? id1_first_big->get_strength() : temp2;
+    temp1 = (id1_first_big->get_id() == str1_biggest_id) ? str1_second_biggest_str : str1_biggest_str;
+    highest_score = ((temp3+temp2+temp1) > highest_score) ? temp3+temp2+temp1 : highest_score;
+
+    //case 10: 3 of the higher tree
+    temp3 = (str3_biggest_str > id2_first_big->get_strength()) ? str3_biggest_str : id1_first_big->get_strength();
+    temp3 = (id2_second_big->get_strength() > temp3) ? id2_second_big->get_strength() : temp3;
+    if(id2_first_big->get_id() == str2_biggest_id && id2_second_big->get_id() == str2_second_biggest_id
+      || id2_first_big->get_id() == str2_second_biggest_id && id2_second_big->get_id() == str2_biggest_id )
+        temp2 = str2_third_biggest_str;
+    else {
+        if (id2_first_big->get_id() == str2_biggest_id || id2_second_big->get_id() == str2_biggest_id)
+            temp2 = str2_second_biggest_str;
+        else
+            temp2 = str2_biggest_str;
+    }
+    temp2= (id1_first_big->get_strength() > temp2) ? id1_first_big->get_strength() : temp2;
+    temp1= (id1_first_big->get_id() == str1_biggest_id) ? str1_second_biggest_str : str1_biggest_str;
+    highest_score = ((temp3+temp2+temp1) > highest_score) ? temp3+temp2+temp1 : highest_score;
+
+    return highest_score;
 
 }
