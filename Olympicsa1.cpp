@@ -277,24 +277,168 @@ output_t<int> Olympics::get_team_strength(int teamId) {
     catch (KeyNotFound &error) {
         return StatusType::FAILURE;
     }
-    return StatusType::SUCCESS;
+}
+
+void Olympics::uniteStr(int t1size1, int t1size2, int t1size3, int t2size1, int t2size2, int t2size3,
+                        Node<ContestantStr*, StrCond>* team1STR1[],Node<ContestantStr*, StrCond>* team1STR2[],
+                        Node<ContestantStr*, StrCond>* team1STR3[],Node<ContestantStr*, StrCond>* team2STR1[],
+                        Node<ContestantStr*, StrCond>* team2STR2[], Node<ContestantStr*, StrCond>* team2STR3[],
+                        int unitedStrSize, int totalSize, Node<ContestantStr*, StrCond>* unitedStr[])
+{
+    Node<ContestantStr*, StrCond>* selectedData;
+    int* updated;
+    int i = 0, j = 0, k = 0, l = 0, m = 0, n = 0, currIndex = 0, smallest;
+    while((i<t1size1)||(j<t1size2)||(k<t1size3)||(l<t2size1)||(m<t2size2)||(n<t2size3))
+    {
+        selectedData = nullptr, updated = nullptr;
+        smallest = -1;
+        while((i < t1size1)&&(team1STR1[i]->getNodeData()->getIndex()>= unitedStrSize))
+            i++;
+        while((j < t1size2)&&(team1STR2[j]->getNodeData()->getIndex()>= unitedStrSize))
+            j++;
+        while((k < t1size3)&&(team1STR3[k]->getNodeData()->getIndex()>= unitedStrSize))
+            k++;
+        while((l < t2size1)&&(team1STR1[l]->getNodeData()->getIndex()>= unitedStrSize))
+            l++;
+        while((m < t2size2)&&(team2STR2[m]->getNodeData()->getIndex()>= unitedStrSize))
+            m++;
+        while((n < t2size3)&&(team2STR3[n]->getNodeData()->getIndex()>= unitedStrSize))
+            n++;
+        if((i<t1size1)&&((smallest==-1)||(team1STR1[i]->getKey()<smallest)))
+        {
+            smallest = team1STR1[i]->getKey();
+            selectedData = team1STR1[i];
+            updated = &i;
+        }
+        if((j<t1size2)&&((smallest==-1)||(team1STR2[j]->getKey()<smallest)))
+        {
+            smallest = team1STR2[j]->getKey();
+            selectedData = team1STR2[j];
+            updated = &j;
+        }
+        if((k<t1size3)&&((smallest==-1)||(team1STR3[k]->getKey()<smallest)))
+        {
+            smallest = team1STR3[k]->getKey();
+            selectedData = team1STR3[k];
+            updated = &k;
+        }
+        if((l<t2size1)&&((smallest==-1)||(team2STR1[l]->getKey()<smallest)))
+        {
+            smallest = team2STR1[l]->getKey();
+            selectedData = team2STR1[l];
+            updated = &l;
+        }
+        if((m<t2size2)&&((smallest==-1)||(team2STR2[m]->getKey()<smallest)))
+        {
+            smallest = team2STR2[m]->getKey();
+            selectedData = team2STR2[m];
+            updated = &m;
+        }
+        if((n<t2size3)&&((smallest==-1)||(team2STR3[n]->getKey()<smallest)))
+        {
+            smallest = team2STR3[n]->getKey();
+            selectedData = team2STR3[n];
+            updated = &n;
+        }
+        unitedStr[currIndex++] = selectedData;
+        selectedData->getNodeData()->setIndex(totalSize + 10);
+        (*updated)++;
+    }
 }
 
 StatusType Olympics::unite_teams(int teamId1, int teamId2) {
-    Team *team1 = m_teams.find(teamId1);
-    Team newTeam = Team(teamId1, team1->getCountryPtr()->get_country_id(),
-                        team1->get_sport(), team1->getCountryPtr());
-    /*TODO:add in Team getSize1, getSize2, getSize3
-     * in Team add function to set 4 arrays 1 of ContestantID* and 3 of ContestantStr*
-     * sort everything
-     * in AVL tree add function to build tree from sorted array
-     * use function for all the arrays
-     * */
+    if((teamId1 <= 0)||(teamId2 <= 0)||(teamId1 == teamId2))
+        return StatusType::INVALID_INPUT;
+    try{
+        Team *team1 = m_teams.find(teamId1);
+        Team *team2 = m_teams.find(teamId2);
+        if(((team1->getCountryPtr()->get_country_id()) != (team2->getCountryPtr()->get_country_id()))||
+                                    (team1->get_sport()!=team2->get_sport()))
+            return StatusType::FAILURE;
+        Team newTeam = Team(teamId1, team1->getCountryPtr()->get_country_id(),
+                            team1->get_sport(), team1->getCountryPtr());
+        int t1size1 = team1->getTeamSize(1);
+        int t1size2 = team1->getTeamSize(2);
+        int t1size3 = team1->getTeamSize(3);
+        int t2size1 = team2->getTeamSize(1);
+        int t2size2 = team2->getTeamSize(2);
+        int t2size3 = team2->getTeamSize(3);
+        int totalSize = t1size1+t1size2+t1size3+t2size1+t2size2+t2size3;
+        Node<ContestantID*, int>* team1ID[t1size1+t1size2+t1size3];
+        Node<ContestantStr*, StrCond>* team1STR1[t1size1];
+        Node<ContestantStr*, StrCond>* team1STR2[t1size2];
+        Node<ContestantStr*, StrCond>* team1STR3[t1size3];
+        Node<ContestantID*, int>* team2ID[t2size1+t2size2+t2size3];
+        Node<ContestantStr*, StrCond>* team2STR1[t2size1];
+        Node<ContestantStr*, StrCond>* team2STR2[t2size2];
+        Node<ContestantStr*, StrCond>* team2STR3[t2size3];
+        team1->fillArray(team1ID,team1STR1,team1STR2,team1STR3, t1size1,t1size2,t1size3);
+        team2->fillArray(team2ID,team2STR1,team2STR2,team2STR3, t2size1,t2size2,t2size3);
+        Node<ContestantID*, int>* teamTotalID[totalSize];
+        int indexT1 = 0, indexT2 = 0, duplicates = 0, currIndex=0;
+        while((indexT1 < t1size1+t1size2+t1size3)||(indexT2 < t2size1+t2size2+t2size3))
+        {
+            if((indexT2 >= t2size1+t2size2+t2size3)||
+                ((indexT1 < t1size1+t1size2+t1size3) && (team1ID[indexT1]->getKey())<(team2ID[indexT2]->getKey())))
+                teamTotalID[currIndex++]=team1ID[indexT1++];
+            else if((indexT1 >= t1size1+t1size2+t1size3) ||
+                ((indexT2 < t2size1+t2size2+t2size3)&&(team1ID[indexT1]->getKey())>(team2ID[indexT2]->getKey())))
+                teamTotalID[currIndex++]=team2ID[indexT2++];
+            else //they are the same contestant
+            {
+                teamTotalID[currIndex++]=team1ID[indexT1++];
+                duplicates++;
+                indexT2++;
+            }
+            teamTotalID[currIndex-1]->getNodeData()->getContestantStrPtr()->setIndex(currIndex-1);
+        }
+        int leftOver = (totalSize-duplicates)%3;
+        int unitedStr1Size = (totalSize - duplicates)/3;
+        int unitedStr2Size = unitedStr1Size;
+        int unitedStr3Size = unitedStr1Size;
+        if(leftOver >= 1)
+        {
+            unitedStr1Size++;
+            if(leftOver==2)
+                unitedStr2Size++;
+        }
+        Node<ContestantStr*, StrCond>* unitedStr1[unitedStr1Size];
+        Node<ContestantStr*, StrCond>* unitedStr2[unitedStr2Size];
+        Node<ContestantStr*, StrCond>* unitedStr3[unitedStr3Size];
+        uniteStr(t1size1,t1size2,t1size3,t2size1,t2size2,t2size3,team1STR1,
+                 team1STR2,team1STR3,team2STR1,team2STR2,team2STR3,unitedStr1Size,totalSize,unitedStr1);
+        uniteStr(t1size1,t1size2,t1size3,t2size1,t2size2,t2size3,team1STR1,
+                 team1STR2,team1STR3,team2STR1,team2STR2,team2STR3,unitedStr1Size+unitedStr2Size,totalSize,
+                 unitedStr2);
+        uniteStr(t1size1,t1size2,t1size3,t2size1,t2size2,t2size3,team1STR1,
+                 team1STR2,team1STR3,team2STR1,team2STR2,team2STR3,unitedStr1Size+unitedStr2Size+unitedStr3Size,
+                 totalSize,unitedStr3);
 
 
-    m_teams.remove(teamId1);
-    m_teams.remove(teamId2);
-    return StatusType::FAILURE;
+
+        }
+
+
+
+
+
+
+        //m_teams.remove(teamId1);
+        //m_teams.remove(teamId2);
+        /*TODO:
+         * in Team add function to set 4 arrays 1 of ContestantID* and 3 of ContestantStr*
+         * sort everything
+         * in AVL tree add function to build tree from sorted array
+         * use function for all the arrays
+          * */
+    }
+    catch (std::bad_alloc &error) {
+        return StatusType::ALLOCATION_ERROR;
+    }
+    catch (KeyNotFound &error) {
+        return StatusType::FAILURE;
+    }
+    return StatusType::SUCCESS;
 }
 
 StatusType Olympics::play_match(int teamId1, int teamId2) {

@@ -25,6 +25,8 @@ public:
     Node<T,Cond>* getRoot();
     Node<T,Cond>* getBiggest();
     Node<T,Cond>* getSmallest();
+    void fillArray(Node<T,Cond>* arr[], int index);
+    void fillArrayImpl(Node<T, Cond> *node, Node<T,Cond>* arr[], int* index);
 
 };
 
@@ -122,6 +124,17 @@ Node<T,Cond>* AVLTree<T,Cond>::getSmallest()
     return this->root->findSmallest();
 }
 
+template<class T, class Cond>
+void AVLTree<T,Cond>::fillArray(Node<T,Cond>* arr[], int index) {
+    fillArrayImpl(root,arr,&index);
+}
 
-
+template<class T, class Cond>
+void AVLTree<T,Cond>::fillArrayImpl(Node<T, Cond> *node, Node<T,Cond>* arr[], int* index) {
+    if (node == nullptr)
+        return;
+    fillArrayImpl(node->getLeft(), arr, index);
+    arr[(*index)++] = node;
+    fillArrayImpl(node->getRight(), arr, index);
+}
 #endif //AVL_TREE_H

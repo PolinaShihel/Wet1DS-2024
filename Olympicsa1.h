@@ -27,6 +27,11 @@ private:
     AVLTree<Team, int> m_teams;
     AVLTree<Contestant, int> m_contestants;
     void travelInOrderTeams(Node<Team, int>* node);
+    void uniteStr(int t1size1, int t1size2, int t1size3, int t2size1, int t2size2, int t2size3,
+                            Node<ContestantStr*, StrCond>* team1STR1[],Node<ContestantStr*, StrCond>* team1STR2[],
+                            Node<ContestantStr*, StrCond>* team1STR3[],Node<ContestantStr*, StrCond>* team2STR1[],
+                            Node<ContestantStr*, StrCond>* team2STR2[], Node<ContestantStr*, StrCond>* team2STR3[],
+                            int unitedStrSize, int totalSize, Node<ContestantStr*, StrCond>* unitedStr[]);
 	
 public:
 	// <DO-NOT-MODIFY> {

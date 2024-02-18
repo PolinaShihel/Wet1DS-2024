@@ -38,12 +38,18 @@ public:
     Country* getCountryPtr();
     Sport get_sport();
     int getID();
+    int getTeamSize(int teamNum);
     void addContestantToTeam(Contestant * contestant);
     void removeContestantFromTeam(Contestant * contestant);
     bool aleadyExists(int id);
     void destoryTrees();
     void updateContestantStr(int id, int prevStr, int str);
     int getTeamStrength();
+    void fillArray(Node<ContestantID*, int>* ID[], Node<ContestantStr*, StrCond>* Str1[],
+                   Node<ContestantStr*, StrCond>* Str2[], Node<ContestantStr*, StrCond>* Str3[], int size1,
+                   int size2, int size3);
+    void merge2arrays(Node<ContestantID*, int>* total[], Node<ContestantID*, int>* ID1[],
+                      Node<ContestantID*, int>* ID2[], int size1, int size2);
 };
 
 

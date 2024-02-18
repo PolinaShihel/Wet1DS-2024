@@ -9,13 +9,15 @@ class ContestantStr {
 private:
     ContestantID* conIDPtr;
     Contestant* conPtr;
+    int index;
 public:
     ContestantStr() = default;
     ContestantStr(ContestantID* IDptr, Contestant* conPtr);
     ContestantStr(const ContestantStr &toCopy) = default;
     ~ContestantStr()=default;
-
+    int getIndex();
     Contestant* getConPtr();
+    void setIndex(int IDindex);
 };
 
 

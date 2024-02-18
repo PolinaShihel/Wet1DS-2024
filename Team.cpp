@@ -20,6 +20,14 @@ int Team::getID(){
     return this->teamId;
 }
 
+int Team::getTeamSize(int teamNum)
+{
+    if(teamNum == 1)
+        return this->contenstantId1.getSize();
+    if(teamNum == 2)
+        return this->contenstantId2.getSize();
+    return this->contenstantId3.getSize();
+}
 bool Team::aleadyExists(int id) {
     return (this->contenstantId1.exist(id) || this->contenstantId2.exist(id) || this->contenstantId3.exist(id));
 }
@@ -269,4 +277,24 @@ int Team::getTeamStrength(){
         return 0;
     return this->contenstantStr1.getBiggest()->getKey() + this->contenstantStr2.getBiggest()->getKey()
                                                                      + this->contenstantStr3.getBiggest()->getKey();
+}
+
+void Team::fillArray(Node<ContestantID*, int>* ID[], Node<ContestantStr*, StrCond>* Str1[],
+               Node<ContestantStr*, StrCond>* Str2[], Node<ContestantStr*, StrCond>* Str3[],
+               int size1, int size2, int size3)
+{
+    this->contenstantId1.fillArray(ID, 0);
+    if(size2!=0 || size3!=0)
+        this->contenstantId2.fillArray(ID, size1);
+    if(size3!=0)
+        this->contenstantId3.fillArray(ID, size1+size2);
+    this->contenstantStr1.fillArray(Str1, 0);
+    this->contenstantStr2.fillArray(Str2, 0);
+    this->contenstantStr3.fillArray(Str3, 0);
+}
+
+void Team::merge2arrays(Node<ContestantID*, int>* total[], Node<ContestantID*, int>* ID1[],
+                        Node<ContestantID*, int>* ID2[], int size1, int size2)
+{
+
 }
