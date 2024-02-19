@@ -170,7 +170,7 @@ Node<T,Cond>* AVLTree<T,Cond>::getSecondBiggest()
 template<class T, class Cond>
 Node<T,Cond>* AVLTree<T,Cond>::getSecondSmallest()
 {
-    if(!this->root)
+    if((!this->root)||(this->size==1))
         return nullptr;
     return this->root->findSecondSmallest(root);
 }
@@ -186,7 +186,7 @@ Node<T,Cond>* AVLTree<T,Cond>::getThirdBiggest()
 template<class T, class Cond>
 Node<T,Cond>* AVLTree<T,Cond>::getThirdSmallest()
 {
-    if(!this->root)
+    if((!this->root)||(this->size<=2))
         return nullptr;
     return this->root->findThirdSmallest(root);
 }
