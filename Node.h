@@ -18,10 +18,10 @@ template <class T, class Cond>
 class Node
 {
     Cond key;
-    Node *right;
-    Node *left;
     int height;
     T data;
+    Node *right;
+    Node *left;
 public:
     //Constructors/Destructors
     Node(Cond key,T data): key(key), right(nullptr),
@@ -36,7 +36,10 @@ public:
     T* getNodeDataPointer();
     Node* getRight();
     Node* getLeft();
+    void setRight(Node* node);
+    void setLeft(Node* node);
     Cond getKey() const;
+    Node* getNext();
     int getHeight() const;  //not sure if needed
     //Rotations
     Node* rotate();
@@ -98,6 +101,18 @@ template <class T, class Cond>
 Node<T,Cond>* Node<T,Cond>::getRight()
 {
     return right;
+}
+
+template <class T, class Cond>
+void Node<T,Cond>::setRight(Node<T, Cond> *node)
+{
+    this->right = node;
+}
+
+template <class T, class Cond>
+void Node<T,Cond>::setLeft(Node<T, Cond> *node)
+{
+    this->left = node;
 }
 
 template <class T, class Cond>
@@ -386,7 +401,6 @@ Node<T,Cond>* Node<T,Cond>::findSmallest()
         return this;
     return this->left->findSmallest();
 }
-
 #endif //WET1_NODE_H
 
 

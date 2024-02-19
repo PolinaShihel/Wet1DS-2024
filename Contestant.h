@@ -36,8 +36,8 @@ public:
     bool teamsFull();
     void freeTeam(int id);
     void setStrength(int strength);
-
-
+    bool inTeam(int id);
+    void uniteTeams(Team* toDelete, Team* toCheck);
 
 };
 

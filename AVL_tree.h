@@ -13,7 +13,7 @@ private:
 
 public:
     AVLTree(): root(nullptr), size(0), smallest(nullptr), biggest(nullptr) {}
-    AVLTree(T arr[],int size);
+    AVLTree(Node<T, Cond>* arr[],int size, int start, int end);
     virtual ~AVLTree();
     void insert(const Cond& key,const T& data);
     T* find(const Cond& key);
@@ -21,8 +21,10 @@ public:
     T findValue(const Cond& key);
     void remove(const Cond& key);
     void reverseInOrderTraversal(int *const output);
+    Node<T,Cond>* sortedArrayTo(Node<T, Cond>* arr[], int start, int end);
     int getSize();
     Node<T,Cond>* getRoot();
+    Node<T,Cond>* findNode(Cond &key);
     Node<T,Cond>* getBiggest();
     Node<T,Cond>* getSmallest();
     Node<T,Cond>* getSecondBiggest();
@@ -33,16 +35,24 @@ public:
     void fillArrayImpl(Node<T, Cond> *node, Node<T,Cond>* arr[], int* index);
 
 };
+template<class T,class Cond>
+Node<T,Cond>* AVLTree<T,Cond>::sortedArrayTo( Node<T, Cond>* arr[], int start, int end)
+{
+    if (start > end)
+        return nullptr;
+    int mid = start + (end - start) / 2;
+    Node<T,Cond>* currNode =  new Node<T,Cond>(arr[mid]->getKey(),arr[mid]->getNodeData());
+    currNode->setLeft(sortedArrayTo(arr, start, mid - 1));
+    currNode->setRight(sortedArrayTo(arr, mid + 1, end));
+    currNode->calcHeight();
+    return currNode;
+}
 
 template<class T, class Cond>
-AVLTree<T,Cond>::AVLTree(T arr[],int size)
+AVLTree<T,Cond>::AVLTree(Node<T, Cond>* arr[],int size, int start, int end): root(this->sortedArrayTo(arr,start,end)), size(size), smallest(this->getSmallest()), biggest(this->getBiggest())
 {
-//    TODO BUILD THISSS !!!!!!!!!!!!!! :(
-
-    this->size = size;
-    this->smallest = this->getSmallest();
-    this->biggest = this->getBiggest();
 }
+
 
 template<class T, class Cond>
 AVLTree<T,Cond>::~AVLTree()
@@ -64,6 +74,11 @@ void AVLTree<T,Cond>::insert(const Cond &key,const T& data) {
 template<class T, class Cond>
 T*  AVLTree<T,Cond>::find(const Cond &key) {
     return root->findNode(key)->getNodeDataPointer();
+}
+
+template<class T, class Cond>
+Node<T,Cond>*  AVLTree<T,Cond>::findNode(Cond &key) {
+    return root->findNode(key);
 }
 
 template<class T, class Cond>

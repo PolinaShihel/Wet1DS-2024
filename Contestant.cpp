@@ -68,3 +68,29 @@ void Contestant::setStrength(int strength)
 {
     this->strength = strength;
 }
+bool Contestant::inTeam(int id){
+    return (team1ptr!= nullptr && team1ptr->getID() == id)||(team2ptr!= nullptr && team2ptr->getID() == id)||
+    (team3ptr!= nullptr && team3ptr->getID() == id);
+}
+void Contestant::uniteTeams(Team *toDelete, Team *toCheck) {
+    bool exists = inTeam(toCheck->getID());
+    if(this->team1ptr->getID() == toDelete->getID()){
+        if(exists)
+            this->team1ptr= nullptr;
+        else
+            this->team1ptr = toCheck;
+    }
+    else if(this->team2ptr->getID() == toDelete->getID()) {
+        if (exists)
+            this->team2ptr = nullptr;
+        else
+            this->team2ptr = toCheck;
+    }
+    else
+    {
+        if (exists)
+            this->team3ptr = nullptr;
+        else
+            this->team3ptr = toCheck;
+    }
+}
