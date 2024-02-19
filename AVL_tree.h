@@ -9,10 +9,15 @@ private:
     int size{};
     void reverseInOrderTraversalImpl(Node<T,Cond>* node, int *const output, int* index);
     Node<T,Cond> *smallest;
+    Node<T,Cond> *secondSmallest;
+    Node<T,Cond> *thirdSmallest;
     Node<T,Cond> *biggest;
+    Node<T,Cond> *secondBiggest;
+    Node<T,Cond> *thirdBiggest;
 
 public:
-    AVLTree(): root(nullptr), size(0), smallest(nullptr), biggest(nullptr) {}
+    AVLTree(): root(nullptr), size(0), smallest(nullptr),secondSmallest(nullptr),thirdSmallest(nullptr),biggest(nullptr),
+                                                        secondBiggest(nullptr),thirdBiggest(nullptr){}
     AVLTree(Node<T, Cond>* arr[],int size, int start, int end);
     virtual ~AVLTree();
     void insert(const Cond& key,const T& data);
@@ -49,7 +54,9 @@ Node<T,Cond>* AVLTree<T,Cond>::sortedArrayTo( Node<T, Cond>* arr[], int start, i
 }
 
 template<class T, class Cond>
-AVLTree<T,Cond>::AVLTree(Node<T, Cond>* arr[],int size, int start, int end): root(this->sortedArrayTo(arr,start,end)), size(size), smallest(this->getSmallest()), biggest(this->getBiggest())
+AVLTree<T,Cond>::AVLTree(Node<T, Cond>* arr[],int size, int start, int end): root(this->sortedArrayTo(arr,start,end)),
+size(size), smallest(this->getSmallest()), secondSmallest(this->getSecondSmallest()), thirdSmallest(this->getThirdSmallest()),
+biggest(this->getBiggest()), secondBiggest(this->getSecondBiggest()), thirdBiggest(this->getThirdBiggest())
 {
 }
 
@@ -68,7 +75,11 @@ void AVLTree<T,Cond>::insert(const Cond &key,const T& data) {
         this->root = this->root->insertNode(key,data);
     this->size++;
     this->smallest = this->getSmallest();
+    this->secondSmallest = this->getSecondSmallest();
+    this->thirdSmallest = this->getThirdSmallest();
     this->biggest = this->getBiggest();
+    this->secondBiggest = this->getSecondBiggest();
+    this->thirdBiggest = this->getThirdBiggest();
 }
 
 template<class T, class Cond>
@@ -98,7 +109,11 @@ void AVLTree<T,Cond>::remove(const Cond& key) {
     this->root = this->root->deleteNode(key);
     this->size--;
     this->smallest = this->getSmallest();
+    this->secondSmallest = this->getSecondSmallest();
+    this->thirdSmallest = this->getThirdSmallest();
     this->biggest = this->getBiggest();
+    this->secondBiggest = this->getSecondBiggest();
+    this->thirdBiggest = this->getThirdBiggest();
 }
 
 template<class T, class Cond>
@@ -147,7 +162,7 @@ Node<T,Cond>* AVLTree<T,Cond>::getSmallest()
 template<class T, class Cond>
 Node<T,Cond>* AVLTree<T,Cond>::getSecondBiggest()
 {
-    if(!this->root)
+    if((!this->root)||(this->size==1))
         return nullptr;
     return this->root->findSecondBiggest(root);
 }
@@ -163,7 +178,7 @@ Node<T,Cond>* AVLTree<T,Cond>::getSecondSmallest()
 template<class T, class Cond>
 Node<T,Cond>* AVLTree<T,Cond>::getThirdBiggest()
 {
-    if(!this->root)
+    if((!this->root)||(this->size<=2))
         return nullptr;
     return this->root->findThirdBiggest(root);
 }
