@@ -471,9 +471,7 @@ output_t<int> Olympics::austerity_measures(int teamId) {
         Team *team = this->m_teams.find(teamId);
         if (team->getContestantCount() == 3 || (team->getContestantCount() % 3) != 0 )
             return 0;
-        //TODO: case of 6
         highest_strength= team->austerity_measures();
-
     }
         catch (std::bad_alloc &error) {
             return StatusType::ALLOCATION_ERROR;

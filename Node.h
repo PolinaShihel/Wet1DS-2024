@@ -249,6 +249,8 @@ Node<T,Cond>* Node<T,Cond>::findThirdSmallest(Node *root)
 template <class T, class Cond>
 Node<T,Cond>* Node<T,Cond>::findSecondBiggest(Node *root)
 {
+    if(root->right == nullptr)
+        return root;
     if(root -> right ->right == nullptr)
         return root;
     return findSecondBiggest(root->right);
@@ -257,6 +259,8 @@ Node<T,Cond>* Node<T,Cond>::findSecondBiggest(Node *root)
 template <class T, class Cond>
 Node<T,Cond>* Node<T,Cond>::findSecondSmallest(Node *root)
 {
+    if(root->left == nullptr)
+        return root;
     if(root -> left ->left == nullptr)
         return root;
     return findSecondSmallest(root->left);
