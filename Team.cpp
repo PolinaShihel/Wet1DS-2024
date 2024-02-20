@@ -326,13 +326,13 @@ void Team::fillArray(Node<ContestantID *, int> *ID[],
 int Team::austerity_measures() {
     int highest_score = 0;
 
-    int str3_biggest_str = this->contenstantStr3->getBiggest()->getNodeData()->getConPtr()->get_strength();
-    int str2_biggest_str = this->contenstantStr2->getBiggest()->getNodeData()->getConPtr()->get_strength();
-    int str1_biggest_str = this->contenstantStr1->getBiggest()->getNodeData()->getConPtr()->get_strength();
+    int str3_biggest_str = this->contenstantStr3->get_biggest()->getNodeData()->getConPtr()->get_strength();
+    int str2_biggest_str = this->contenstantStr2->get_biggest()->getNodeData()->getConPtr()->get_strength();
+    int str1_biggest_str = this->contenstantStr1->get_biggest()->getNodeData()->getConPtr()->get_strength();
 
-    int str3_second_biggest_str = this->contenstantStr3->getSecondBiggest()->getNodeData()->getConPtr()->get_strength();
-    int str2_second_biggest_str = this->contenstantStr2->getSecondBiggest()->getNodeData()->getConPtr()->get_strength();
-    int str1_second_biggest_str = this->contenstantStr1->getSecondBiggest()->getNodeData()->getConPtr()->get_strength();
+    int str3_second_biggest_str = this->contenstantStr3->get_second_biggest()->getNodeData()->getConPtr()->get_strength();
+    int str2_second_biggest_str = this->contenstantStr2->get_second_biggest()->getNodeData()->getConPtr()->get_strength();
+    int str1_second_biggest_str = this->contenstantStr1->get_second_biggest()->getNodeData()->getConPtr()->get_strength();
 
     if(this->getContestantCount() == 6){
         int temp;
@@ -354,27 +354,16 @@ int Team::austerity_measures() {
 
     //Contestant count > 6
 
-    Contestant *id1_first_big =
-            this->contenstantId1->getBiggest()->getNodeData()->getContestantPtr();
-    Contestant *id2_first_big =
-            this->contenstantId2->getBiggest()->getNodeData()->getContestantPtr();
-    Contestant *id2_second_big = this->contenstantId2->getSecondBiggest()
-            ->getNodeData()
-            ->getContestantPtr();
-    Contestant *id2_last =
-            this->contenstantId2->getSmallest()->getNodeData()->getContestantPtr();
-    Contestant *id2_second_last = this->contenstantId2->getSecondSmallest()
-            ->getNodeData()
-            ->getContestantPtr();
-    Contestant *id3_last =
-            this->contenstantId3->getSmallest()->getNodeData()->getContestantPtr();
+    Contestant *id1_first_big =this->contenstantId1->get_biggest()->getNodeData()->getContestantPtr();
+    Contestant *id2_first_big =this->contenstantId2->get_biggest()->getNodeData()->getContestantPtr();
+    Contestant *id2_second_big = this->contenstantId2->get_second_biggest()->getNodeData()->getContestantPtr();
+    Contestant *id2_last =this->contenstantId2->get_smallest()->getNodeData()->getContestantPtr();
+    Contestant *id2_second_last = this->contenstantId2->get_second_smallest()->getNodeData()->getContestantPtr();
+    Contestant *id3_last =this->contenstantId3->get_smallest()->getNodeData()->getContestantPtr();
 
-    int str3_biggest_id =
-            this->contenstantStr3->getBiggest()->getNodeData()->getConPtr()->get_id();
-    int str2_biggest_id =
-            this->contenstantStr2->getBiggest()->getNodeData()->getConPtr()->get_id();
-    int str1_biggest_id =
-            this->contenstantStr1->getBiggest()->getNodeData()->getConPtr()->get_id();
+    int str3_biggest_id =this->contenstantStr3->get_biggest()->getNodeData()->getConPtr()->get_id();
+    int str2_biggest_id =this->contenstantStr2->get_biggest()->getNodeData()->getConPtr()->get_id();
+    int str1_biggest_id =this->contenstantStr1->get_biggest()->getNodeData()->getConPtr()->get_id();
 
     int temp1,temp2,temp3; //highest of each tree
 
@@ -453,8 +442,8 @@ int Team::austerity_measures() {
                     ? temp3 + temp2 + temp1
                     : highest_score;
 
-    int str2_third_biggest_str = this->contenstantStr2->getThirdBiggest()->getNodeData()->getConPtr()->get_strength();
-    int str2_second_biggest_id = this->contenstantStr2->getSecondBiggest()->getNodeData()->getConPtr()->get_id();
+    int str2_third_biggest_str = this->contenstantStr2->get_third_biggest()->getNodeData()->getConPtr()->get_strength();
+    int str2_second_biggest_id = this->contenstantStr2->get_second_biggest()->getNodeData()->getConPtr()->get_id();
 
     //case 8: 3 of the lower tree
     temp3 = (id3_last->get_id() == str3_biggest_id) ? str3_second_biggest_str : str3_biggest_str;
