@@ -303,7 +303,6 @@ void Team::updateContestantStr(int id, int prevStr, int str) {
 int Team::getTeamStrength() {
     if ((this->getContestantCount() == 0)||(this->getContestantCount() % 3) != 0)
         return 0;
-    StrCond x = this->contenstantStr1->getBiggest()->getKey();
     return this->contenstantStr1->getBiggest()->getKey() + this->contenstantStr2->getBiggest()->getKey() +
            this->contenstantStr3->getBiggest()->getKey();
 }
@@ -447,8 +446,8 @@ int Team::austerity_measures() {
 
     //case 8: 3 of the lower tree
     temp3 = (id3_last->get_id() == str3_biggest_id) ? str3_second_biggest_str : str3_biggest_str;
-    if (id2_last->get_id() == str2_biggest_id && id2_second_last->get_id() == str2_second_biggest_id
-    || id2_last->get_id() == str2_second_biggest_id && id2_second_last->get_id() == str2_biggest_id)
+    if ((id2_last->get_id() == str2_biggest_id && id2_second_last->get_id() == str2_second_biggest_id)
+                                                  ||(id2_last->get_id() == str2_second_biggest_id && id2_second_last->get_id() == str2_biggest_id))
         temp2 = str2_third_biggest_str;
     else {
         if (id2_last->get_id() == str2_biggest_id ||
@@ -472,8 +471,8 @@ int Team::austerity_measures() {
     //case 10: 3 of the higher tree
     temp3 = (str3_biggest_str > id2_first_big->get_strength()) ? str3_biggest_str : id2_first_big->get_strength();
     temp3 = (id2_second_big->get_strength() > temp3) ? id2_second_big->get_strength() : temp3;
-    if (id2_first_big->get_id() == str2_biggest_id && id2_second_big->get_id() == str2_second_biggest_id
-    || id2_first_big->get_id() == str2_second_biggest_id && id2_second_big->get_id() == str2_biggest_id)
+    if ((id2_first_big->get_id() == str2_biggest_id && id2_second_big->get_id() == str2_second_biggest_id)
+    || (id2_first_big->get_id() == str2_second_biggest_id && id2_second_big->get_id() == str2_biggest_id))
         temp2 = str2_third_biggest_str;
     else {
         if (id2_first_big->get_id() == str2_biggest_id ||
