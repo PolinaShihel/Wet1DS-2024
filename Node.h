@@ -74,6 +74,7 @@ public:
     Node *findSecondBiggest(Node *root);
 
     Node *findSecondSmallest(Node *root);
+    Node *findBiggestParent(Node *root);
 
     Node *findBiggest();
 
@@ -275,6 +276,14 @@ Node<T, Cond> *Node<T, Cond>::findSecondBiggest(Node *node) {
     return findSecondBiggest(node->right);
 }
 
+template <class T, class Cond>
+Node<T,Cond>* Node<T,Cond>::findBiggestParent(Node *root)
+{
+    if(root -> right ->right == nullptr)
+        return root;
+    return findBiggestParent(root->right);
+}
+
 template<class T, class Cond>
 Node<T, Cond> *Node<T, Cond>::findSecondSmallest(Node *node) {
     if ((node->left == nullptr) && (node->right != nullptr))
@@ -329,7 +338,7 @@ Node<T, Cond> *Node<T, Cond>::deleteNode(const Cond &newKey) {
         } else {
             Node<T, Cond> *temp;
             if (this->left->right != nullptr) {
-                Node<T, Cond> *biggestFather = findSecondBiggest(this->left);
+                Node<T, Cond> *biggestFather = findBiggestParent(this->left);
                 toSwap = biggestFather->right;
                 temp = toSwap->left;
                 biggestFather->right = this;

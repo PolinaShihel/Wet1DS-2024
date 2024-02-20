@@ -419,7 +419,6 @@ StatusType Olympics::unite_teams(int teamId1, int teamId2) {
     team2->destoryTrees();
     m_teams.remove(teamId2);
     team1->getCountryPtr()->remove_team();
-    int x = 1;
   }
   /*TODO:
    * take care of case with 2 contestants in total
