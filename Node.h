@@ -20,10 +20,10 @@ class KeyNotFound : public std::exception {
 template<class T, class Cond>
 class Node {
     Cond key;
-    int height;
-    T data;
     Node *right;
     Node *left;
+    int height;
+    T data;
 public:
     //Constructors/Destructors
     Node(Cond key, T data) : key(key), right(nullptr),
