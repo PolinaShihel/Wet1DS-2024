@@ -420,9 +420,6 @@ StatusType Olympics::unite_teams(int teamId1, int teamId2) {
     m_teams.remove(teamId2);
     team1->getCountryPtr()->remove_team();
   }
-  /*TODO:
-   * take care of case with 2 contestants in total
-   * */
   catch (std::bad_alloc &error) {
     return StatusType::ALLOCATION_ERROR;
   } catch (KeyNotFound &error) {
@@ -467,6 +464,8 @@ output_t<int> Olympics::austerity_measures(int teamId) {
 
     try {
         Team *team = this->m_teams.find(teamId);
+        if(team->getContestantCount() < 3)
+            return StatusType::FAILURE;
         if (team->getContestantCount() == 3 || (team->getContestantCount() % 3) != 0 )
             return 0;
         highest_strength= team->austerity_measures();
