@@ -7,7 +7,7 @@ class AVLTree{
 private:
     Node<T,Cond>  *root;
     int size{};
-    void reverseInOrderTraversalImpl(Node<T,Cond>* node, int *const output, int* index);
+    //void reverseInOrderTraversalImpl(Node<T,Cond>* node, int *const output, int* index);
     Node<T,Cond> *smallest;
     Node<T,Cond> *secondSmallest;
     Node<T,Cond> *thirdSmallest;
@@ -23,13 +23,13 @@ public:
     void insert(const Cond& key,const T& data);
     T* find(const Cond& key);
     bool exist(const Cond& key);
-    T findValue(const Cond& key);
+    //T findValue(const Cond& key);
     void remove(const Cond& key);
-    void reverseInOrderTraversal(int *const output);
+    //void reverseInOrderTraversal(int *const output);
     Node<T,Cond>* sortedArrayTo(Node<T, Cond>* arr[], int start, int end);
     int getSize();
     Node<T,Cond>* getRoot();
-    Node<T,Cond>* findNode(Cond &key);
+    //Node<T,Cond>* findNode(Cond &key);
     Node<T,Cond>* getBiggest();
     Node<T,Cond>* getSmallest();
     Node<T,Cond>* getSecondBiggest();
@@ -93,10 +93,10 @@ T*  AVLTree<T,Cond>::find(const Cond &key) {
     return root->findNode(key)->getNodeDataPointer();
 }
 
-template<class T, class Cond>
-Node<T,Cond>*  AVLTree<T,Cond>::findNode(Cond &key) {
-    return root->findNode(key);
-}
+//template<class T, class Cond>
+//Node<T,Cond>*  AVLTree<T,Cond>::findNode(Cond &key) {
+//    return root->findNode(key);
+//}
 
 template<class T, class Cond>
 bool  AVLTree<T,Cond>::exist(const Cond &key)
@@ -105,10 +105,10 @@ bool  AVLTree<T,Cond>::exist(const Cond &key)
     return temp != nullptr;
 }
 
-template<class T, class Cond>
-T  AVLTree<T,Cond>::findValue(const Cond &key) {
-    return root->findNode(key)->getNodeData();
-}
+//template<class T, class Cond>
+//T  AVLTree<T,Cond>::findValue(const Cond &key) {
+//    return root->findNode(key)->getNodeData();
+//}
 
 template<class T, class Cond>
 void AVLTree<T,Cond>::remove(const Cond& key) {
@@ -122,20 +122,20 @@ void AVLTree<T,Cond>::remove(const Cond& key) {
     this->thirdBiggest = this->getThirdBiggest();
 }
 
-template<class T, class Cond>
-void AVLTree<T, Cond>::reverseInOrderTraversal(int *const output){
-    int index = 0;
-    reverseInOrderTraversalImpl(root, output, &index);
-}
-
-template<class T, class Cond>
-void AVLTree<T,Cond>::reverseInOrderTraversalImpl(Node<T, Cond> *node, int *const output, int* index) {
-    if(node == nullptr)
-        return;
-    reverseInOrderTraversalImpl(node->getRight(), output, index);
-    output[(*index)++] = node->getKey();
-    reverseInOrderTraversalImpl(node->getLeft(), output, index);
-}
+//template<class T, class Cond>
+//void AVLTree<T, Cond>::reverseInOrderTraversal(int *const output){
+//    int index = 0;
+//    reverseInOrderTraversalImpl(root, output, &index);
+//}
+//
+//template<class T, class Cond>
+//void AVLTree<T,Cond>::reverseInOrderTraversalImpl(Node<T, Cond> *node, int *const output, int* index) {
+//    if(node == nullptr)
+//        return;
+//    reverseInOrderTraversalImpl(node->getRight(), output, index);
+//    output[(*index)++] = node->getKey();
+//    reverseInOrderTraversalImpl(node->getLeft(), output, index);
+//}
 
 template<class T, class Cond>
 int AVLTree<T,Cond>::getSize()

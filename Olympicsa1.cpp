@@ -97,7 +97,7 @@ StatusType Olympics::add_contestant(int contestantId, int countryId,
     if (!m_contestants.exist(contestantId) && m_countries.exist(countryId)) {
       Country *tempCountry = m_countries.find(countryId);
       Contestant toAdd =
-          Contestant(contestantId, countryId, sport, strength, tempCountry);
+          Contestant(contestantId, sport, strength, tempCountry);
       m_contestants.insert(contestantId, toAdd);
       tempCountry->add_contestant();
     } else {

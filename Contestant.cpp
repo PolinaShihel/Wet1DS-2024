@@ -4,8 +4,8 @@
 
 #include "Contestant.h"
 
-Contestant::Contestant(int contestantId, int countryId, Sport sport, int strength ,Country* countryPtr) :
-    contestantId(contestantId), countryId(countryId), sport(sport), strength(strength) ,countryPtr(countryPtr)
+Contestant::Contestant(int contestantId, Sport sport, int strength ,Country* countryPtr) :
+    contestantId(contestantId),  sport(sport), strength(strength) ,countryPtr(countryPtr)
     ,team1ptr(nullptr), team2ptr(nullptr), team3ptr(nullptr) {}
 int Contestant::get_strength() {
     return strength;

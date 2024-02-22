@@ -52,8 +52,6 @@ public:
 
     Cond getKey() const;
 
-    Node *getNext();
-
     int getHeight() const;  //not sure if needed
     //Rotations
     Node *rotate();

@@ -11,7 +11,6 @@ class Country;
 class Contestant {
 private:
     int contestantId;
-    int countryId;
     Sport sport;
     int strength;
     Country* countryPtr;
@@ -19,7 +18,7 @@ private:
     Team* team2ptr;//NOT SURE IF PTR
     Team* team3ptr;//NOT SURE IF PTR
 public:
-    Contestant(int contestantId, int countryId, Sport sport, int strength ,Country* countryPtr);
+    Contestant(int contestantId, Sport sport, int strength ,Country* countryPtr);
     ~Contestant() = default;
     Contestant(const Contestant &toCopy) = default;
     int get_strength();
