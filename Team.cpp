@@ -1,20 +1,20 @@
 #include "Team.h"
 
-Team::Team(int teamId, int countryId, Sport sport, Country *CountryPtr)
-        : teamId(teamId), countryId(countryId), sport(sport),
+Team::Team(int teamId, Sport sport, Country *CountryPtr)
+        : teamId(teamId), sport(sport),
           countryPtr(CountryPtr), contenstantId1(new AVLTree<ContestantID *, int>()),
           contenstantStr1(new AVLTree<ContestantStr *, StrCond>()), contenstantId2(new AVLTree<ContestantID *, int>()),
           contenstantStr2(new AVLTree<ContestantStr *, StrCond>()), contenstantId3(new AVLTree<ContestantID *, int>()),
           contenstantStr3(new AVLTree<ContestantStr *, StrCond>()) {
 }
 
-Team::Team(int teamId, int countryId, Sport sport, Country *CountryPtr,
+Team::Team(int teamId, Sport sport, Country *CountryPtr,
            Node<ContestantID *, int> *teamTotalID[], int unitedStr1Size,
            int unitedStr2Size, int unitedStr3Size,
            Node<ContestantStr *, StrCond> *unitedStr1[],
            Node<ContestantStr *, StrCond> *unitedStr2[],
            Node<ContestantStr *, StrCond> *unitedStr3[])
-        : teamId(teamId), countryId(countryId), sport(sport),
+        : teamId(teamId), sport(sport),
           countryPtr(CountryPtr) {
 
     this->contenstantId1 = new AVLTree<ContestantID *, int>(

@@ -16,7 +16,7 @@ class ContestantStr;
 class Team {
 private:
     int teamId;
-    int countryId;
+    //int countryId;
     Sport sport;
     Country* countryPtr;
 
@@ -34,9 +34,9 @@ private:
     void deleteInOrderID(Node<ContestantID*, int>* node);
     void deleteInOrderStr(Node<ContestantStr*, StrCond>* node);
 public:
-    Team(int teamId,int countryId, Sport sport,Country* country);
+    Team(int teamId, Sport sport,Country* country);
     
-    Team(int teamId, int countryId, Sport sport, Country *CountryPtr ,Node<ContestantID*, int>* teamTotalID[] , int unitedStr1Size, int unitedStr2Size, int unitedStr3Size,Node<ContestantStr*, StrCond>* unitedStr1[], Node<ContestantStr*, StrCond>* unitedStr2[],Node<ContestantStr*, StrCond>* unitedStr3[]);
+    Team(int teamId, Sport sport, Country *CountryPtr ,Node<ContestantID*, int>* teamTotalID[] , int unitedStr1Size, int unitedStr2Size, int unitedStr3Size,Node<ContestantStr*, StrCond>* unitedStr1[], Node<ContestantStr*, StrCond>* unitedStr2[],Node<ContestantStr*, StrCond>* unitedStr3[]);
 
     Team(const Team &toCopy) = default;
     ~Team() = default;

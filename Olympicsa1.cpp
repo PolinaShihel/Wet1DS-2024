@@ -54,7 +54,7 @@ StatusType Olympics::add_team(int teamId, int countryId, Sport sport) {
   try {
     if (!m_teams.exist(teamId) && m_countries.exist(countryId)) {
       Country *tempCountry = m_countries.find(countryId);
-      Team toAdd = Team(teamId, countryId, sport, tempCountry);
+      Team toAdd = Team(teamId, sport, tempCountry);
       m_teams.insert(teamId, toAdd);
       tempCountry->add_team();
     } else {
