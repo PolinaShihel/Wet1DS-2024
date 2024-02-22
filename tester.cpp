@@ -162,6 +162,181 @@ int main() {
     cout << "==INVALID_INPUT" << endl;
     print(ol.get_strength(5)); // no existing id
     cout << "==FAILURE" << endl;
+    print(ol.update_contestant_strength(312,44));
+    cout << "==SUCCESS" <<endl;
+    print(ol.get_strength(312));
+    cout << "==50" <<endl;
+    cout <<endl<< "-----------done update strength,get strength------" << endl << "checking get medals:" << endl;
+
+    print(ol.get_medals(222));
+    cout << "==4" <<endl;
+    print(ol.get_medals(333));
+    cout << "==15" <<endl;
+    print(ol.get_medals(0)); // invalid id
+    cout << "==INVALID INPUT" <<endl;
+    print(ol.get_medals(4)); // none existing country
+    cout << "==FAILURE" <<endl;
+    cout <<endl<< "-----------done get medal------" << endl << "checking get team str and play match:" << endl;
+    // countries: 222-4, 333-15
+    // teams: 22-football-222 , 33-acro-333 , 44-acro-333 , 55-acro-333 , 66-acro-333, 77-football-333
+    // contestants : 311-acro- 66,33 (12)   |  312-acro (50) | 313-acro (3) | 304-acro (9)
+    //changing data:
+    print(ol.remove_contestant_from_team(66,311));
+    cout << "==SUCCESS" <<endl;
+    print(ol.add_contestant(210,222,Sport::FOOTBALL,6));
+    cout << "==SUCCESS" <<endl;
+    print(ol.add_contestant(215,222,Sport::FOOTBALL,22));
+    cout << "==SUCCESS" <<endl;
+    print(ol.add_contestant(213,222,Sport::FOOTBALL,9));
+    cout << "==SUCCESS" <<endl;
+    print(ol.add_contestant(315,333,Sport::ACROBATICS,2));
+    cout << "==SUCCESS" <<endl;
+    print(ol.add_contestant(305,333,Sport::ACROBATICS,10));
+    cout << "==SUCCESS" <<endl;
+    print(ol.add_contestant(366,333,Sport::ACROBATICS,20));
+    cout << "==SUCCESS" <<endl;
+    print(ol.add_contestant(367,333,Sport::ACROBATICS,5));
+    cout << "==SUCCESS" <<endl;
+    print(ol.add_contestant(368,333,Sport::ACROBATICS,15));
+    cout << "==SUCCESS" <<endl;
+    print(ol.add_contestant(266,222,Sport::ACROBATICS,2));
+    cout << "==SUCCESS" <<endl;
+    print(ol.add_contestant(267,222,Sport::ACROBATICS,5));
+    cout << "==SUCCESS" <<endl;
+    print(ol.add_contestant(268,222,Sport::ACROBATICS,15));
+    cout << "==SUCCESS" <<endl;
+    print(ol.add_team(23,222,Sport::ACROBATICS));
+    cout << "==SUCCESS" <<endl;
+    print(ol.update_contestant_strength(312,-34));
+    cout << "==SUCCESS" <<endl;
+    print(ol.get_strength(312));
+    cout << "==16" << endl;
+    print(ol.add_contestant_to_team(22,210));
+    cout << "==SUCCESS" <<endl;
+    print(ol.add_contestant_to_team(22,213));
+    cout << "==SUCCESS" <<endl;
+    print(ol.add_contestant_to_team(22,215));
+    cout << "==SUCCESS" <<endl;
+    print(ol.add_contestant_to_team(33,305));
+    cout << "==SUCCESS" <<endl;
+    print(ol.add_contestant_to_team(33,312));
+    cout << "==SUCCESS" <<endl;
+    print(ol.add_contestant_to_team(33,313));
+    cout << "==SUCCESS" <<endl;
+    print(ol.add_contestant_to_team(33,304));
+    cout << "==SUCCESS" <<endl;
+    print(ol.add_contestant_to_team(33,315));
+    cout << "==SUCCESS" <<endl;
+    print(ol.add_contestant_to_team(66,366));
+    cout << "==SUCCESS" <<endl;
+    print(ol.add_contestant_to_team(66,367));
+    cout << "==SUCCESS" <<endl;
+    print(ol.add_contestant_to_team(66,368));
+    cout << "==SUCCESS" <<endl;
+    print(ol.add_contestant_to_team(55,368));
+    cout << "==SUCCESS" <<endl;
+    print(ol.add_contestant_to_team(55,311));
+    cout << "==SUCCESS" <<endl;
+    print(ol.add_contestant_to_team(23,266));
+    cout << "==SUCCESS" <<endl;
+    print(ol.add_contestant_to_team(23,267));
+    cout << "==SUCCESS" <<endl;
+    print(ol.add_contestant_to_team(23,268));
+
+    print(ol.get_team_strength(33));
+    cout << "==29" <<endl;
+    print(ol.get_team_strength(22));
+    cout << "==37" <<endl;
+    print(ol.get_team_strength(66));
+    cout << "==40" <<endl;
+    print(ol.get_team_strength(44));
+    cout << "==0" <<endl;
+    print(ol.get_team_strength(55));
+    cout << "==0" <<endl;
+    print(ol.get_team_strength(23));
+    cout << "==22" <<endl;
+    print(ol.get_team_strength(0)); // id invalid
+    cout << "==INVALID_INPUT" <<endl;
+    print(ol.get_team_strength(7)); // none exisiting
+    cout << "==FAILURE" <<endl;
+
+    print(ol.play_match(22,22)); // id1==id2
+    cout << "==INVALID_INPUT" <<endl;
+    print(ol.play_match(22,0)); // id2 invalid
+    cout << "==INVALID_INPUT" <<endl;
+    print(ol.play_match(4,22)); // id1 not exist
+    cout << "==FAILURE" <<endl;
+    print(ol.play_match(23,8)); // id2 not exist
+    cout << "==FAILURE" <<endl;
+    print(ol.play_match(0,22)); //id1 invalid
+    cout << "==INVALID_INPUT" <<endl;
+    print(ol.play_match(55,22)); //diff sport
+    cout << "==FAILURE" <<endl;
+    print(ol.get_medals(333));
+    cout << "==15" <<endl;
+    print(ol.play_match(33,66));
+    cout << "==SUCCESS" <<endl;
+    print(ol.get_medals(333));
+    cout << "==16" <<endl;
+    print(ol.get_medals(222));
+    cout << "==4" <<endl;
+    print(ol.play_match(23,55));
+    cout << "==SUCCESS" <<endl;
+    print(ol.get_medals(222));
+    cout << "==5" <<endl;
+    print(ol.play_match(44,55)); // no change in medal - tie
+    cout << "==SUCCESS" <<endl;
+    print(ol.get_medals(333));
+    cout << "==16" <<endl;
+
+    cout <<endl<< "-----------done get team str and play match------" << endl << "checking unite teams:" << endl;
+    print(ol.unite_teams(22,0)); // id2 invalid
+    cout << "==INVALID INPUT" << endl;
+    print(ol.unite_teams(0,22)); // id1 invalid
+    cout << "==INVALID INPUT" << endl;
+    print(ol.unite_teams(22,22)); // id1==id2
+    cout << "==INVALID INPUT" << endl;
+    print(ol.unite_teams(22,23)); // diff sport
+    cout << "==FAILURE" << endl;
+    print(ol.unite_teams(6,23)); //  id1 not exist
+    cout << "==FAILURE" << endl;
+    print(ol.unite_teams(22,8)); //  id2 not exist
+    cout << "==FAILURE" << endl;
+    print(ol.unite_teams(22,66)); //  diff countries
+    cout << "==FAILURE" << endl;
+    print(ol.unite_teams(33,66));
+    cout << "==SUCCESS" << endl;
+    print(ol.get_team_strength(33));
+    cout << "==48" << endl;
+    print(ol.get_team_strength(66)); // united with 33 so doesnt exist
+    cout << "==FAILURE" << endl;
+    print(ol.add_team(66,222,Sport::ACROBATICS));
+    cout << "==SUCCESS" << endl;
+
+
+    //------------- need to add tests--------------------//
+
+
+
+    cout <<endl<< "-----------done unite teams------" << endl << "checking austerity measures:" << endl;
+
+    print(ol.austerity_measures(0)); // invalid id
+    cout << "==INVALID INPUT" << endl;
+    print(ol.austerity_measures(9)); // not exist
+    cout << "==FAILURE" << endl;
+    print(ol.austerity_measures(55)); // less than 3 contestants
+    cout << "==FAILURE" << endl;
+    print(ol.austerity_measures(22)); // only 3 contestants
+    cout << "==0" << endl;
+    print(ol.austerity_measures(33)); // only 3 contestants
+    cout << "==51" << endl;
+
+
+    //------------- need to add tests--------------------//
+
+
+    cout <<endl<< "-----------done austerity measures------" << endl;
+
 
 }
 
