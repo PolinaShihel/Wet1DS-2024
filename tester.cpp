@@ -149,17 +149,19 @@ int main() {
     print(ol.get_strength(311));
     cout << "==5" <<endl;
     print(ol.update_contestant_strength(311,7));
+    cout << "==SUCCESS" <<endl;
+    print(ol.get_strength(311));
     cout << "==12" <<endl;
     print(ol.update_contestant_strength(311,-15)); // below 0
-    cout << "FAILURE" <<endl;
+    cout << "==FAILURE" <<endl;
     print(ol.update_contestant_strength(0,6)); // invalid id
-    cout << "INVALID_INPUT" << endl;
+    cout << "==INVALID_INPUT" << endl;
     print(ol.update_contestant_strength(5,6)); // no existing id
-    cout << "FAILURE" << endl;
+    cout << "==FAILURE" << endl;
     print(ol.get_strength(0)); // invalid id
-    cout << "INVALID_INPUT" << endl;
+    cout << "==INVALID_INPUT" << endl;
     print(ol.get_strength(5)); // no existing id
-    cout << "FAILURE" << endl;
+    cout << "==FAILURE" << endl;
 
 }
 

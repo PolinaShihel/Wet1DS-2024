@@ -276,8 +276,8 @@ void Team::moveContestant(AVLTree<ContestantID *, int> *idDest,
 
 void Team::updateContestantStr(int id, int prevStr, int str) {
     int id1 = this->contenstantId1->getBiggest()->getKey();
-    int idSmall2 = this->contenstantId2->getSmallest()->getKey();
-    int idBig2 = this->contenstantId2->getBiggest()->getKey();
+    int idSmall2 = this->contenstantId2->getSmallest() ? this->contenstantId2->getSmallest()->getKey() : 0;
+    int idBig2 = this->contenstantId2->getBiggest() ? this->contenstantId2->getBiggest()->getKey(): 0;
     StrCond st = StrCond(prevStr, id);
     if (id <= id1) // the contestant is in the first tree
     {
