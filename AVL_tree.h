@@ -3,17 +3,17 @@
 #include "Node.h"
 
 template<class T, class Cond>
-class AVLTree{
+class AVLTree {
 private:
-    Node<T,Cond>  *root;
+    Node<T, Cond> *root;
     int size{};
     //void reverseInOrderTraversalImpl(Node<T,Cond>* node, int *const output, int* index);
-    Node<T,Cond> *smallest;
-    Node<T,Cond> *secondSmallest;
-    Node<T,Cond> *thirdSmallest;
-    Node<T,Cond> *biggest;
-    Node<T,Cond> *secondBiggest;
-    Node<T,Cond> *thirdBiggest;
+    Node<T, Cond> *smallest;
+    Node<T, Cond> *secondSmallest;
+    Node<T, Cond> *thirdSmallest;
+    Node<T, Cond> *biggest;
+    Node<T, Cond> *secondBiggest;
+    Node<T, Cond> *thirdBiggest;
 
 public:
     AVLTree(): root(nullptr), size(0), smallest(nullptr),secondSmallest(nullptr),thirdSmallest(nullptr),biggest(nullptr),
@@ -44,8 +44,8 @@ public:
     Node<T,Cond>* get_third_smallest();
     void fillArray(Node<T,Cond>* arr[], int index);
     void fillArrayImpl(Node<T, Cond> *node, Node<T,Cond>* arr[], int* index);
-
 };
+
 template<class T,class Cond>
 Node<T,Cond>* AVLTree<T,Cond>::sortedArrayTo( Node<T, Cond>* arr[], int start, int end)
 {

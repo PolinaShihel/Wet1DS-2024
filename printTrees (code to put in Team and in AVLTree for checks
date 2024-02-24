@@ -1,0 +1,88 @@
+void Team::print_trees()
+{
+    std::cout << "ID1\n";
+    this->contenstantId1->printInOrderTrees(contenstantId1->getRoot());
+    std::cout << "\nBiggest: "<<this->contenstantId1->getBiggest()->getKey();
+    std::cout << "\nSmallest: "<<this->contenstantId1->getSmallest()->getKey();
+    if(this->contenstantId1->getSecondBiggest() != nullptr)
+    {
+        std::cout << "\nSecond Biggest: "<<this->contenstantId1->getSecondBiggest()->getKey();
+        std::cout << "\nSecond Smallest: "<<this->contenstantId1->getSecondSmallest()->getKey();
+        if(this->contenstantId1->getThirdBiggest()!= nullptr) {
+            std::cout << "\nThird Biggest: " << this->contenstantId1->getThirdBiggest()->getKey();
+            std::cout << "\nThird Smallest: " << this->contenstantId1->getThirdSmallest()->getKey();
+        }
+    }
+    std::cout << "\nID2\n";
+    this->contenstantId2->printInOrderTrees(contenstantId2->getRoot());
+    std::cout << "\nBiggest: "<<this->contenstantId2->getBiggest()->getKey();
+    std::cout << "\nSmallest: "<<this->contenstantId2->getSmallest()->getKey();
+    if(this->contenstantId2->getSecondBiggest()!= nullptr) {
+        std::cout << "\nSecond Biggest: " << this->contenstantId2->getSecondBiggest()->getKey();
+        std::cout << "\nSecond Smallest: " << this->contenstantId2->getSecondSmallest()->getKey();
+        if(this->contenstantId2->getThirdBiggest()!= nullptr) {
+            std::cout << "\nThird Biggest: " << this->contenstantId2->getThirdBiggest()->getKey();
+            std::cout << "\nThird Smallest: " << this->contenstantId2->getThirdSmallest()->getKey();
+        }
+    }
+    std::cout << "\nID3\n";
+    this->contenstantId3->printInOrderTrees(contenstantId3->getRoot());
+    std::cout << "\nBiggest: "<<this->contenstantId3->getBiggest()->getKey();
+    std::cout << "\nSmallest: "<<this->contenstantId3->getSmallest()->getKey();
+    if(this->contenstantId3->getSecondBiggest()!= nullptr){
+        std::cout << "\nSecond Biggest: " << this->contenstantId3->getSecondBiggest()->getKey();
+        std::cout << "\nSecond Smallest: " << this->contenstantId3->getSecondSmallest()->getKey();
+        if(this->contenstantId3->getThirdBiggest()!= nullptr) {
+            std::cout << "\nThird Biggest: " << this->contenstantId3->getThirdBiggest()->getKey();
+            std::cout << "\nThird Smallest: " << this->contenstantId3->getThirdSmallest()->getKey();
+        }
+    }
+    std::cout << "\nSTR1\n";
+    this->contenstantStr1->printInOrderTrees(contenstantStr1->getRoot());
+    std::cout << "\nBiggest: "<<this->contenstantStr1->getBiggest()->getKey();
+    std::cout << "\nSmallest: "<<this->contenstantStr1->getSmallest()->getKey();
+    if(this->contenstantStr1->getSecondBiggest()!= nullptr) {
+        std::cout << "\nSecond Biggest: " << this->contenstantStr1->getSecondBiggest()->getKey();
+        std::cout << "\nSecond Smallest: " << this->contenstantStr1->getSecondSmallest()->getKey();
+        if(contenstantStr1->getThirdBiggest()!= nullptr) {
+            std::cout << "\nThird Biggest: " << this->contenstantStr1->getThirdBiggest()->getKey();
+            std::cout << "\nThird Smallest: " << this->contenstantStr1->getThirdSmallest()->getKey();
+        }
+    }
+    std::cout << "\nSTR2\n";
+    this->contenstantStr2->printInOrderTrees(contenstantStr2->getRoot());
+    std::cout << "\nBiggest: "<<this->contenstantStr2->getBiggest()->getKey();
+    std::cout << "\nSmallest: "<<this->contenstantStr2->getSmallest()->getKey();
+    if(this->contenstantStr2->getSecondBiggest()!= nullptr) {
+        std::cout << "\nSecond Biggest: " << this->contenstantStr2->getSecondBiggest()->getKey();
+        std::cout << "\nSecond Smallest: " << this->contenstantStr2->getSecondSmallest()->getKey();
+        if(this->contenstantStr2->getThirdBiggest()!= nullptr) {
+            std::cout << "\nThird Biggest: " << this->contenstantStr2->getThirdBiggest()->getKey();
+            std::cout << "\nThird Smallest: " << this->contenstantStr2->getThirdSmallest()->getKey();
+        }
+    }
+    std::cout << "\nSTR3\n";
+    this->contenstantStr3->printInOrderTrees(contenstantStr3->getRoot());
+    std::cout << "\nBiggest: "<<this->contenstantStr3->getBiggest()->getKey();
+    std::cout << "\nSmallest: "<<this->contenstantStr3->getSmallest()->getKey();
+    if(this->contenstantStr3->getSecondBiggest()!= nullptr) {
+        std::cout << "\nSecond Biggest: " << this->contenstantStr3->getSecondBiggest()->getKey();
+        std::cout << "\nSecond Smallest: " << this->contenstantStr3->getSecondSmallest()->getKey();
+        if(this->contenstantStr3->getThirdBiggest()!= nullptr) {
+            std::cout << "\nThird Biggest: " << this->contenstantStr3->getThirdBiggest()->getKey();
+            std::cout << "\nThird Smallest: " << this->contenstantStr3->getThirdSmallest()->getKey();
+        }
+    }
+    std::cout << "\n" ;
+
+}
+
+
+template<class T,class Cond>
+void AVLTree<T,Cond>::printInOrderTrees(Node<T, Cond>* node) {
+    if (node == nullptr)
+        return;
+    this->printInOrderTrees(node->getLeft());
+    std::cout <<  node->getKey() << " ";
+    this->printInOrderTrees(node->getRight());
+}

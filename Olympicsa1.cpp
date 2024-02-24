@@ -417,6 +417,7 @@ StatusType Olympics::unite_teams(int teamId1, int teamId2) {
                 teamTotalID[currIndex++] = team2ID[indexT2++];
             else // they are the same contestant
             {
+                team2ID[indexT2]->getNodeData()->getContestantStrPtr()->setIndex(currIndex);
                 teamTotalID[currIndex++] = team1ID[indexT1++];
                 dups[duplicates] = team2ID[indexT2]->getNodeData();
                 duplicates++;
