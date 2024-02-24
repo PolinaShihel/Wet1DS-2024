@@ -404,6 +404,7 @@ StatusType Olympics::unite_teams(int teamId1, int teamId2) {
         for (int i = 0; i < t2size1 + t2size2 + t2size3; i++)
             team2ID[i]->getNodeData()->getContestantPtr()->uniteTeams(team2, team1);
         Node<ContestantID *, int> *teamTotalID[totalSize];
+        ContestantID *dups[totalSize];
         int indexT1 = 0, indexT2 = 0, duplicates = 0, currIndex = 0;
         while ((indexT1 < t1size1 + t1size2 + t1size3) || (indexT2 < t2size1 + t2size2 + t2size3)) {
             if ((indexT2 >= t2size1 + t2size2 + t2size3) || ((indexT1 < t1size1 + t1size2 + t1size3) &&
@@ -417,6 +418,7 @@ StatusType Olympics::unite_teams(int teamId1, int teamId2) {
             else // they are the same contestant
             {
                 teamTotalID[currIndex++] = team1ID[indexT1++];
+                dups[duplicates] = team2ID[indexT2]->getNodeData();
                 duplicates++;
                 indexT2++;
             }
@@ -447,6 +449,10 @@ StatusType Olympics::unite_teams(int teamId1, int teamId2) {
 
         team1->setAllTrees(teamTotalID, unitedStr1Size, unitedStr2Size, unitedStr3Size, unitedStr1, unitedStr2,
                            unitedStr3);
+        for (int i = 0; i < duplicates; ++i) {
+            delete dups[i]->getContestantStrPtr();
+            delete dups[i];
+        }
         team2->destoryTrees();
         m_teams.remove(teamId2);
         team1->getCountryPtr()->remove_team();
