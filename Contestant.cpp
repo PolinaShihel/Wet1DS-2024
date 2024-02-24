@@ -74,13 +74,13 @@ bool Contestant::inTeam(int id){
 }
 void Contestant::uniteTeams(Team *toDelete, Team *toCheck) {
     bool exists = inTeam(toCheck->getID());
-    if(this->team1ptr->getID() == toDelete->getID()){
+    if(this->team1ptr &&(this->team1ptr->getID() == toDelete->getID())){
         if(exists)
             this->team1ptr= nullptr;
         else
             this->team1ptr = toCheck;
     }
-    else if(this->team2ptr->getID() == toDelete->getID()) {
+    else if(this->team2ptr && (this->team2ptr->getID() == toDelete->getID())) {
         if (exists)
             this->team2ptr = nullptr;
         else

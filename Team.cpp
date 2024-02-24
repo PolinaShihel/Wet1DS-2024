@@ -78,7 +78,7 @@ void Team::addContestantToTeam(Contestant *contestant) {
         if (id1 == nullptr || id < id1->getKey()) {
             this->contenstantId1->insert(id, toAddID);
             this->contenstantStr1->insert(strCond, toAddSTR);
-
+            id1 = this->contenstantId1->getBiggest();
             if (this->contenstantId1->getSize() >
                 this->contenstantId2->getSize() + 1) {
                 //                move id1 to id2
@@ -99,6 +99,8 @@ void Team::addContestantToTeam(Contestant *contestant) {
                    (id > id1->getKey() && id < idBig2->getKey())) {
             this->contenstantId2->insert(id, toAddID);
             this->contenstantStr2->insert(strCond, toAddSTR);
+            idSmall2 = this->contenstantId2->getSmallest();
+            idBig2 = this->contenstantId2->getBiggest();
             if (this->contenstantId2->getSize() >
                 this->contenstantId1->getSize() + 1) {
                 //                   move id2 smallest to id1
@@ -115,7 +117,7 @@ void Team::addContestantToTeam(Contestant *contestant) {
         } else if (id3 == nullptr || id > idBig2->getKey()) {
             this->contenstantId3->insert(id, toAddID);
             this->contenstantStr3->insert(strCond, toAddSTR);
-
+            id3 = this->contenstantId3->getSmallest();
             if (this->contenstantId3->getSize() >
                 this->contenstantId2->getSize() + 1) {
                 //                move id3 smallest to id2
@@ -153,6 +155,7 @@ void Team::removeContestantFromTeam(Contestant *contestant) {
     if (id <= id1->getKey()) {
         ContestantID *toDelete = *(this->contenstantId1->find(id));
         ContestantStr *toDeleteStr = toDelete->getContestantStrPtr();
+        id1 = this->contenstantId1->getBiggest();
         this->contenstantId1->remove(id);
         this->contenstantStr1->remove(strCond);
         delete toDelete;
@@ -188,6 +191,8 @@ void Team::removeContestantFromTeam(Contestant *contestant) {
         ContestantStr *toDeleteStr = toDelete->getContestantStrPtr();
         this->contenstantId2->remove(id);
         this->contenstantStr2->remove(strCond);
+        idSmall2 = this->contenstantId2->getSmallest();
+        idBig2 = this->contenstantId2->getBiggest();
         delete toDelete;
         delete toDeleteStr;
         id2Size--;
@@ -208,6 +213,7 @@ void Team::removeContestantFromTeam(Contestant *contestant) {
         ContestantStr *toDeleteStr = toDelete->getContestantStrPtr();
         this->contenstantId3->remove(id);
         this->contenstantStr3->remove(strCond);
+        id3 = this->contenstantId3->getSmallest();
         delete toDelete;
         delete toDeleteStr;
         id3Size--;
