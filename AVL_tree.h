@@ -44,6 +44,7 @@ public:
     Node<T,Cond>* get_third_smallest();
     void fillArray(Node<T,Cond>* arr[], int index);
     void fillArrayImpl(Node<T, Cond> *node, Node<T,Cond>* arr[], int* index);
+    void printInOrderTrees(Node<T, Cond>* node);
 };
 
 template<class T,class Cond>
@@ -234,5 +235,14 @@ void AVLTree<T,Cond>::fillArrayImpl(Node<T, Cond> *node, Node<T,Cond>* arr[], in
     fillArrayImpl(node->getLeft(), arr, index);
     arr[(*index)++] = node;
     fillArrayImpl(node->getRight(), arr, index);
+}
+
+template<class T,class Cond>
+void AVLTree<T,Cond>::printInOrderTrees(Node<T, Cond>* node) {
+    if (node == nullptr)
+        return;
+    this->printInOrderTrees(node->getLeft());
+    std::cout <<  node->getKey() << " ";
+    this->printInOrderTrees(node->getRight());
 }
 #endif //AVL_TREE_H

@@ -520,3 +520,26 @@ void Team::setAllTrees(Node<ContestantID *, int> *teamTotalID[],
     this->contenstantStr2 = STR2;
     this->contenstantStr3 = STR3;
 }
+void Team::print_trees()
+{
+    std::cout << "ID1 :";
+    this->contenstantId1->printInOrderTrees(contenstantId1->getRoot());
+
+    std::cout << "\nID2 :";
+    this->contenstantId2->printInOrderTrees(contenstantId2->getRoot());
+
+    std::cout << "\nID3: ";
+    this->contenstantId3->printInOrderTrees(contenstantId3->getRoot());
+
+    std::cout << "\nSTR1: ";
+    this->contenstantStr1->printInOrderTrees(contenstantStr1->getRoot());
+
+    std::cout << "\nSTR2: ";
+    this->contenstantStr2->printInOrderTrees(contenstantStr2->getRoot());
+
+    std::cout << "\nSTR3: ";
+    this->contenstantStr3->printInOrderTrees(contenstantStr3->getRoot());
+
+    std::cout << "\n" ;
+
+}
