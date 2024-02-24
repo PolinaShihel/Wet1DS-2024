@@ -540,13 +540,52 @@ int main() {
     cout << "==37" << endl;
    print(ol2.austerity_measures(220));
     cout << "==30" << endl;
-   print(ol2.remove_contestant_from_team(300,37));////// something is wrong here
+   print(ol2.remove_contestant_from_team(300,37));
+    cout << "==SUCCESS" << endl;
     print(ol2.remove_contestant_from_team(300,34));
+    cout << "==SUCCESS" << endl;
     print(ol2.remove_contestant_from_team(300,30));
+    cout << "==SUCCESS" << endl;
     print(ol2.austerity_measures(300));
+    cout << "==34" << endl;
+    print(ol2.remove_contestant_from_team(220,20));
+    cout << "==SUCCESS" << endl;
+    print(ol2.add_contestant_to_team(220,27));
+    cout << "==SUCCESS" << endl;
+    print(ol2.get_team_strength(220));
+    cout << "==26" << endl;
+    print(ol2.austerity_measures(220));
+    cout << "==30" << endl;
 
+    print(ol2.unite_teams(220,270));
+    cout << "==SUCCESS" << endl;
+    print(ol2.get_team_strength(220));
+    cout << "==34" << endl;
+    print(ol2.austerity_measures(220));
+    cout << "==34" << endl;
+    print(ol2.update_contestant_strength(27,15));
+    cout << "==SUCCESS" << endl;
+    print(ol2.get_team_strength(220));
+    cout << "==44" << endl;
+    print(ol2.austerity_measures(220));
+    cout << "==46" << endl;
 
-
+    print(ol2.remove_contestant_from_team(220,27));
+    cout << "==SUCCESS" << endl;
+    print(ol2.remove_contestant_from_team(220,22));
+    cout << "==SUCCESS" << endl;
+    print(ol2.remove_contestant_from_team(220,21));
+    cout << "==SUCCESS" << endl;
+    print(ol2.get_team_strength(220));
+    cout << "==34" << endl;
+    print(ol2.austerity_measures(220));
+    cout << "==35" << endl;
+    print(ol2.remove_contestant_from_team(220,24));
+    cout << "==SUCCESS" << endl;
+    print(ol2.get_team_strength(220));
+    cout << "==0" << endl;
+    print(ol2.austerity_measures(220));
+    cout << "==0" << endl;
 
 }
 

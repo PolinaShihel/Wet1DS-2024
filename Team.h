@@ -59,7 +59,6 @@ public:
                      int unitedStr3Size,Node<ContestantStr*, StrCond>* unitedStr1[], Node<ContestantStr*,
                      StrCond>* unitedStr2[],Node<ContestantStr*, StrCond>* unitedStr3[]);
     int austerity_measures();
-    void print_trees();
 };
 
 

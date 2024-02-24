@@ -502,7 +502,6 @@ output_t<int> Olympics::austerity_measures(int teamId) {
 
     try {
         Team *team = this->m_teams.find(teamId);
-        team->print_trees();
         if (team->getContestantCount() < 3)
             return StatusType::FAILURE;
         if (team->getContestantCount() == 3 || (team->getContestantCount() % 3) != 0)
