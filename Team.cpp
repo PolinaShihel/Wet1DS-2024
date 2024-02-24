@@ -208,7 +208,7 @@ void Team::removeContestantFromTeam(Contestant *contestant) {
                                      this->contenstantId3, this->contenstantStr3, id3);
             }
         }
-    } else if (id > id3->getKey()) {
+    } else if (id >= id3->getKey()) {
         ContestantID *toDelete = *(this->contenstantId3->find(id));
         ContestantStr *toDeleteStr = toDelete->getContestantStrPtr();
         this->contenstantId3->remove(id);
