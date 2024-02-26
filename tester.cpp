@@ -587,6 +587,54 @@ int main() {
     print(ol2.austerity_measures(220));
     cout << "==0" << endl;
 
+
+    Olympics ol3 = Olympics();
+    print(ol3.add_country(1,5));
+    cout << "==SUCCESS" << endl;
+    print(ol3.add_team(11,1,Sport::FOOTBALL));
+    cout << "==SUCCESS" << endl;
+    print(ol3.add_contestant(20,1,Sport::FOOTBALL,9));
+    cout << "==SUCCESS" << endl;
+    print(ol3.add_contestant(21,1,Sport::FOOTBALL,8));
+    cout << "==SUCCESS" << endl;
+    print(ol3.add_contestant(22,1,Sport::FOOTBALL,7));
+    cout << "==SUCCESS" << endl;
+    print(ol3.add_contestant(23,1,Sport::FOOTBALL,6));
+    cout << "==SUCCESS" << endl;
+    print(ol3.add_contestant(24,1,Sport::FOOTBALL,5));
+    cout << "==SUCCESS" << endl;
+    print(ol3.add_contestant(25,1,Sport::FOOTBALL,4));
+    cout << "==SUCCESS" << endl;
+    print(ol3.add_contestant(26,1,Sport::FOOTBALL,1));
+    cout << "==SUCCESS" << endl;
+    print(ol3.add_contestant(27,1,Sport::FOOTBALL,2));
+    cout << "==SUCCESS" << endl;
+    print(ol3.add_contestant(28,1,Sport::FOOTBALL,3));
+    cout << "==SUCCESS" << endl;
+    print(ol3.add_contestant(29,1,Sport::FOOTBALL,11));
+    cout << "==SUCCESS" << endl;
+    print(ol3.add_contestant_to_team(11,20));
+    cout << "==SUCCESS" << endl;
+    print(ol3.add_contestant_to_team(11,21));
+    cout << "==SUCCESS" << endl;
+    print(ol3.add_contestant_to_team(11,22));
+    cout << "==SUCCESS" << endl;
+    print(ol3.add_contestant_to_team(11,23));
+    cout << "==SUCCESS" << endl;
+    print(ol3.add_contestant_to_team(11,24));
+    cout << "==SUCCESS" << endl;
+    print(ol3.add_contestant_to_team(11,25));
+    cout << "==SUCCESS" << endl;
+    print(ol3.add_contestant_to_team(11,26));
+    cout << "==SUCCESS" << endl;
+    print(ol3.add_contestant_to_team(11,27));
+    cout << "==SUCCESS" << endl;
+    print(ol3.add_contestant_to_team(11,28));
+    cout << "==SUCCESS" << endl;
+    print(ol3.austerity_measures(11));
+    cout << "==21" << endl;
+
+
 }
 
 
