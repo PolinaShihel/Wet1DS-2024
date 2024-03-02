@@ -155,9 +155,9 @@ void Team::removeContestantFromTeam(Contestant *contestant) {
     if (id <= id1->getKey()) {
         ContestantID *toDelete = *(this->contenstantId1->find(id));
         ContestantStr *toDeleteStr = toDelete->getContestantStrPtr();
-        id1 = this->contenstantId1->getBiggest();
         this->contenstantId1->remove(id);
         this->contenstantStr1->remove(strCond);
+        id1 = this->contenstantId1->getBiggest();//why needed?
         delete toDelete;
         delete toDeleteStr;
         id1Size--;

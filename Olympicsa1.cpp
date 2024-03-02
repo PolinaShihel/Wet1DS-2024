@@ -271,11 +271,13 @@ void Olympics::uniteStr(int t1size1, int t1size2, int t1size3, int t2size1,
     Node<ContestantStr *, StrCond> *selectedData;
     int *updated;
     StrCond currentSmallest;
-    int i = 0, j = 0, k = 0, l = 0, m = 0, n = 0, currIndex = 0, smallest;
+    int i = 0, j = 0, k = 0, l = 0, m = 0, n = 0, currIndex = 0;
+    StrCond smallest;
+    StrCond compare = StrCond(-1,-1);
     while ((i < t1size1) || (j < t1size2) || (k < t1size3) || (l < t2size1) ||
            (m < t2size2) || (n < t2size3)) {
         selectedData = nullptr, updated = nullptr;
-        smallest = -1;
+        smallest = StrCond(-1,-1);
         currentSmallest = {-1, -1};
         while ((i < t1size1) &&
                (team1STR1[i]->getNodeData()->getIndex() >= unitedStrSize))
@@ -296,7 +298,7 @@ void Olympics::uniteStr(int t1size1, int t1size2, int t1size3, int t2size1,
                (team2STR3[n]->getNodeData()->getIndex() >= unitedStrSize))
             n++;
         if ((i < t1size1) &&
-            ((smallest == -1) || (team1STR1[i]->getKey() < smallest))) {
+            ((smallest == compare) || (team1STR1[i]->getKey() < smallest))) {
             smallest = team1STR1[i]->getKey();
             currentSmallest = team1STR1[i]->getKey();
             selectedData = team1STR1[i];
@@ -304,7 +306,7 @@ void Olympics::uniteStr(int t1size1, int t1size2, int t1size3, int t2size1,
         }
 
         if ((j < t1size2) &&
-            ((smallest == -1) || (team1STR2[j]->getKey() <= smallest))) {
+            ((smallest == compare) || (team1STR2[j]->getKey() <= smallest))) {
             if(currentSmallest == team1STR2[j]->getKey()){
                 team1STR2[j]->getNodeData()->setIndex(totalSize + 10);
                 j++;
@@ -316,7 +318,7 @@ void Olympics::uniteStr(int t1size1, int t1size2, int t1size3, int t2size1,
             }
         }
         if ((k < t1size3) &&
-            ((smallest == -1) || (team1STR3[k]->getKey() <= smallest))) {
+            ((smallest == compare) || (team1STR3[k]->getKey() <= smallest))) {
             if(currentSmallest == team1STR3[k]->getKey()){
                 team1STR3[k]->getNodeData()->setIndex(totalSize + 10);
                 k++;
@@ -328,7 +330,7 @@ void Olympics::uniteStr(int t1size1, int t1size2, int t1size3, int t2size1,
             }
         }
         if ((l < t2size1) &&
-            ((smallest == -1) || (team2STR1[l]->getKey() <= smallest))) {
+            ((smallest == compare) || (team2STR1[l]->getKey() <= smallest))) {
             if(currentSmallest == team2STR1[l]->getKey()){
                 team2STR1[l]->getNodeData()->setIndex(totalSize + 10);
                 l++;
@@ -340,7 +342,7 @@ void Olympics::uniteStr(int t1size1, int t1size2, int t1size3, int t2size1,
             }
         }
         if ((m < t2size2) &&
-            ((smallest == -1) || (team2STR2[m]->getKey() <= smallest))) {
+            ((smallest == compare) || (team2STR2[m]->getKey() <= smallest))) {
             if(currentSmallest == team2STR2[m]->getKey()){
                 team2STR2[m]->getNodeData()->setIndex(totalSize + 10);
                 m++;
@@ -352,7 +354,7 @@ void Olympics::uniteStr(int t1size1, int t1size2, int t1size3, int t2size1,
             }
         }
         if ((n < t2size3) &&
-            ((smallest == -1) || (team2STR3[n]->getKey() <= smallest))) {
+            ((smallest == compare) || (team2STR3[n]->getKey() <= smallest))) {
             if(currentSmallest == team2STR3[n]->getKey()){
                 team2STR3[n]->getNodeData()->setIndex(totalSize + 10);
                 n++;

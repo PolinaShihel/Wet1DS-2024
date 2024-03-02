@@ -23,6 +23,16 @@ bool StrCond::operator==(const StrCond& other) const
     return ((Strength == other.Strength)&&(ID == other.ID));
 }
 
+bool StrCond::operator>=(const StrCond& other) const
+{
+    return *this > other || *this == other;
+}
+
+bool StrCond::operator<=(const StrCond& other) const
+{
+    return *this < other || *this == other;
+}
+
 StrCond::operator int() const
 {
     return Strength;

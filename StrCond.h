@@ -13,6 +13,8 @@ public:
     ~StrCond() = default;
     bool operator>(const StrCond& other) const;
     bool operator<(const StrCond& other) const;
+    bool operator>=(const StrCond& other) const;
+    bool operator<=(const StrCond& other) const;
     bool operator==(const StrCond& other) const;
     operator int() const;
 };

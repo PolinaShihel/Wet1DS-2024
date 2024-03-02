@@ -4,7 +4,7 @@
 
 #include <string>
 #include <iostream>
-#include "Olympicsa1.h"
+#include "../Olympicsa1.h"
 
 using namespace std;
 static const char *StatusTypeStr[] =
